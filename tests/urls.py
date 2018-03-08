@@ -6,5 +6,5 @@ from django.conf.urls import url, include
 from cruds_mixins.urls import urlpatterns as cruds_mixins_urls
 
 urlpatterns = [
-    url(r'^', include(cruds_mixins_urls, namespace='cruds_mixins')),
+    url(r'^', include(cruds_mixins_urls)),
 ]

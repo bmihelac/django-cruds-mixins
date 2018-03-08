@@ -1,13 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""
-test_django-cruds-mixins
-------------
-
-Tests for `django-cruds-mixins` models module.
-"""
-
 from django.test import TestCase
 
 from cruds_mixins import models
