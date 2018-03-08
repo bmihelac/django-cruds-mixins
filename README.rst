@@ -1,0 +1,76 @@
+=============================
+django-cruds-mixins
+=============================
+
+.. image:: https://badge.fury.io/py/django-cruds-mixins.svg
+    :target: https://badge.fury.io/py/django-cruds-mixins
+
+.. image:: https://travis-ci.org/bmihelac/django-cruds-mixins.svg?branch=master
+    :target: https://travis-ci.org/bmihelac/django-cruds-mixins
+
+.. image:: https://codecov.io/gh/bmihelac/django-cruds-mixins/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/bmihelac/django-cruds-mixins
+
+Your project description goes here
+
+Documentation
+-------------
+
+The full documentation is at https://django-cruds-mixins.readthedocs.io.
+
+Quickstart
+----------
+
+Install django-cruds-mixins::
+
+    pip install django-cruds-mixins
+
+Add it to your `INSTALLED_APPS`:
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        ...
+        'cruds_mixins.apps.CrudsMixinsConfig',
+        ...
+    )
+
+Add django-cruds-mixins's URL patterns:
+
+.. code-block:: python
+
+    from cruds_mixins import urls as cruds_mixins_urls
+
+
+    urlpatterns = [
+        ...
+        url(r'^', include(cruds_mixins_urls)),
+        ...
+    ]
+
+Features
+--------
+
+* TODO
+
+Running Tests
+-------------
+
+Does the code actually work?
+
+::
+
+    source <YOURVIRTUALENV>/bin/activate
+    (myenv) $ pip install tox
+    (myenv) $ tox
+
+Credits
+-------
+
+Tools used in rendering this package:
+
+*  Cookiecutter_
+*  `cookiecutter-djangopackage`_
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`cookiecutter-djangopackage`: https://github.com/pydanny/cookiecutter-djangopackage
