@@ -48,3 +48,5 @@ TEMPLATES = [
 SITE_ID = 1
 
 MIDDLEWARE = ()
+
+TEST_RUNNER = 'snapshottest.django.TestRunner'
