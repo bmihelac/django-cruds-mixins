@@ -1,5 +1,7 @@
 from django_webtest import WebTest
 
+from datetime import date
+
 from django.utils.translation import ugettext as _
 
 from cruds import utils as cruds_utils
@@ -38,6 +40,7 @@ class IntegrationTest(WebTest):
         self.assertContains(response, 'foo bar')
 
         edit_label = _('edit')
+
         self.assertContains(response, edit_label)
         response = response.click(edit_label)
 
@@ -48,4 +51,18 @@ class IntegrationTest(WebTest):
         response = form.submit()
         self.assertEqual(response.status_code, 302)
         response = response.follow()
+        self.assertContains(response, 'BarFoo')
+
+    def test_filters(self):
+        Author.objects.create(
+            name='BarFoo',
+            birthday=date(2000, 1, 1)
+        )
+        url = cruds_utils.crud_url(Author, cruds_utils.ACTION_LIST)
+        response = self.app.get(url)
+        form = response.form
+        form['name'] = 'foo'
+        response = form.submit()
+        self.assertEqual(response.status_code, 200)
+        from .browser import display; display(response.content)
         self.assertContains(response, 'BarFoo')

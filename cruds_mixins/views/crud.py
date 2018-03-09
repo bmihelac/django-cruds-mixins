@@ -223,16 +223,6 @@ class CRUDListView(CRUDMixin,
     def test_func(self, user):
         return self.test_func_list(user)
 
-    def get_summary(self):
-        """
-        Returns summary of objects by field `status`.
-        """
-        qs = self.get_base_queryset()
-        summary = []
-        for key, name in self.model._meta.get_field_by_name('status')[0].choices:
-            summary.append((key, name, qs.filter(status=key).count()))
-        return summary
-
 
 class CRUDDetailView(CRUDMixin,
                      ActionsMixin, DetailView):
