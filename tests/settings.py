@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
 
     'django_tables2',
+    'crispy_forms',
     "cruds_mixins",
 
     'tests.testapp',
@@ -47,6 +48,16 @@ TEMPLATES = [
 
 SITE_ID = 1
 
-MIDDLEWARE = ()
+MIDDLEWARE = (
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+STATIC_URL = '/static/'
 
 TEST_RUNNER = 'snapshottest.django.TestRunner'

@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.shortcuts import (
     redirect,
 )
@@ -71,13 +68,13 @@ class CRUDMixin(object):
         return cruds_utils.crud_url(self.model, cruds_utils.ACTION_CREATE)
 
     def get_update_url(self):
-        return cruds_utils.crud_url(self.model, cruds_utils.ACTION_UPDATE)
+        return cruds_utils.crud_url(self.object, cruds_utils.ACTION_UPDATE)
 
     def get_detail_url(self):
-        return cruds_utils.crud_url(self.model, cruds_utils.ACTION_DETAIL)
+        return cruds_utils.crud_url(self.object, cruds_utils.ACTION_DETAIL)
 
     def get_delete_url(self):
-        return cruds_utils.crud_url(self.model, cruds_utils.ACTION_DELETE)
+        return cruds_utils.crud_url(self.object, cruds_utils.ACTION_DELETE)
 
     # queryset
     def get_base_queryset(self):
@@ -124,7 +121,7 @@ class CRUDMixin(object):
         try:
             return self.get_action(
                 _('edit'),
-                self.get_edit_url()
+                self.get_update_url()
             )
         except NoReverseMatch:
             return None
@@ -152,20 +149,7 @@ class CRUDMixin(object):
         return template_names
 
     def get_title(self):
-        if isinstance(self, TableView):
-            return self.model._meta.verbose_name_plural.capitalize()
-        elif isinstance(self, CreateView):
-            return create_model_title(self.model)
-        elif isinstance(self, DeleteView):
-            return _('Delete %(model)s: %(object)s') % {
-                'model': unicode(self.object._meta.verbose_name),
-                'object': unicode(self.object),
-            }
-        elif isinstance(self, UpdateView):
-            return _('Edit %(object)s') % {'object': unicode(self.object)}
-        elif isinstance(self, DetailView):
-            return unicode(self.object)
-        return ""
+        return self.model._meta.verbose_name_plural.capitalize()
 
     def get_context_data(self, **kwargs):
         context = super(CRUDMixin, self).get_context_data(**kwargs)
@@ -254,6 +238,9 @@ class CRUDDetailView(CRUDMixin,
                      ActionsMixin, DetailView):
     default_template_name = 'cruds_mixins/detail.html'
 
+    def get_title(self):
+        return str(self.object)
+
     def get_actions(self):
         return [self.get_update_action()]
 
@@ -264,6 +251,9 @@ class CRUDDetailView(CRUDMixin,
 class CRUDCreateView(CRUDMixin, CreateView):
     default_template_name = 'cruds_mixins/form.html'
     add_message = False
+
+    def get_title(self):
+        return create_model_title(self.model)
 
     def get_message(self):
         if not self.add_message:
@@ -277,6 +267,9 @@ class CRUDCreateView(CRUDMixin, CreateView):
 class CRUDUpdateView(CRUDMixin, ActionsMixin, UpdateView):
     default_template_name = 'cruds_mixins/form.html'
     add_message = False
+
+    def get_title(self):
+        return _('Edit %(object)s') % {'object': str(self.object)}
 
     def get_message(self):
         if not self.add_message:
@@ -292,6 +285,12 @@ class CRUDUpdateView(CRUDMixin, ActionsMixin, UpdateView):
 
 class CRUDDeleteView(CRUDMixin, DeleteView):
     default_template_name = 'cruds_mixins/delete.html'
+
+    def get_title(self):
+        return _('Delete %(model)s: %(object)s') % {
+            'model': str(self.object._meta.verbose_name),
+            'object': str(self.object),
+        }
 
     def test_func(self, user):
         return self.test_func_delete(user)

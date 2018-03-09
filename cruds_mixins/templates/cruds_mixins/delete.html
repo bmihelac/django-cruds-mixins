@@ -1,0 +1,19 @@
+{% extends base_template|default:"base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+
+  <h1 class="page-header">{{ title }}</h1>
+
+  <p>
+    {% trans "Are you sure?" %}
+  </p>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
+  </form>
+
+{% endblock %}

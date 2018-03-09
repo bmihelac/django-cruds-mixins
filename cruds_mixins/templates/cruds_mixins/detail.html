@@ -1,0 +1,12 @@
+{% extends base_template|default:"cruds_mixins/base.html" %}
+
+{% block main %}
+
+<h1 class="page-header">{{ title }}</h1>
+
+{% include "cruds_mixins/partials/actions.html" %}
+
+{% block detail_content %}
+{% endblock %}
+
+{% endblock %}
