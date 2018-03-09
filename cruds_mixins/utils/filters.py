@@ -16,15 +16,6 @@ class DefaultFilterSet(django_filters.FilterSet):
                     'lookup_expr': 'icontains',
                 }
             },
-            models.ForeignKey: {
-                'filter_class': django_filters.ModelChoiceFilter,
-                'extra': lambda f: {
-                    'queryset': f.rel.to._default_manager.complex_filter(
-                        f.rel.limit_choices_to),
-                    'to_field_name': f.rel.field_name,
-                    'empty_label': '',
-                }
-            },
         }
 
 
