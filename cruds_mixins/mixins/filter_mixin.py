@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from helper.filters import filterset_factory
-from helper.constants import DEFAULT_SKIP_FIELDS
-from helper.pagination import pagination_getvars
+from ..conf import CrudsMixinsConf
+from ..utils.filters import filterset_factory
+from ..utils.pagination import pagination_getvars
 
 
 class FilterMixin(object):
@@ -23,7 +23,7 @@ class FilterMixin(object):
     def get_filterset_fields(self):
         if self.filterset_fields:
             return self.filterset_fields
-        exclude = DEFAULT_SKIP_FIELDS + (self.filterset_exclude_fields or [])
+        exclude = CrudsMixinsConf.DEFAULT_SKIP_FIELDS + (self.filterset_exclude_fields or [])
         return [field.name for field in self.model._meta.fields
                 if field.name not in exclude]
 

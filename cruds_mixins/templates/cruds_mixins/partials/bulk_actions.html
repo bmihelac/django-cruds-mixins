@@ -1,0 +1,16 @@
+{% load i18n %}
+{# display buttons for bulk actions #}
+<div style="display:none" class="hidden-selections"></div>
+
+<div class="checkbox">
+  <label><input type="checkbox" name="select_all" value="1">
+      {% blocktrans with num=num %}
+      Select all {{ num }} results
+      {% endblocktrans %}
+  </label>
+</div>
+
+
+{% for action in bulk_action_actions %}
+<button name="action" type="submit" class="btn {{ action.css_class }}" value="{{ action.code }}">{{ action.title }}</button>
+{% endfor %}

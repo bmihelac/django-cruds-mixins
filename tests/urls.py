@@ -3,8 +3,9 @@ from __future__ import unicode_literals, absolute_import
 
 from django.conf.urls import url, include
 
-from cruds_mixins.urls import urlpatterns as cruds_mixins_urls
+from .testapp import urls as testapp_urls
+
 
 urlpatterns = [
-    url(r'^', include(cruds_mixins_urls)),
+    url(r'^', include(testapp_urls)),
 ]

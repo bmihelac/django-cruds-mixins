@@ -41,7 +41,7 @@ class FKColumn(BaseLinkColumn):
                 kwargs={'pk': value.pk})
         except NoReverseMatch:
             return value
-        return self.render_link(url, value)
+        return self.render_link(url, record, value)
 
     @classmethod
     def from_field(cls, field):
@@ -89,13 +89,13 @@ class ViewLinkColumn(LinkColumn):
                 return ""
         if self.action:
             url = crud_url(record, self.action)
-            return self.render_link(url, self.action_name)
+            return self.render_link(url, record, self.action_name)
         if hasattr(record, 'get_absolute_url'):
             url = record.get_absolute_url()
-            return self.render_link(url, self.action_name)
+            return self.render_link(url, record, self.action_name)
         try:
             url = crud_url(record, 'detail')
-            return self.render_link(url, self.action_name)
+            return self.render_link(url, record, self.action_name)
         except NoReverseMatch:
             return ""
 
@@ -126,7 +126,7 @@ class LinkDetail(BaseLinkColumn):
         except AttributeError:
             return value
         text = getattr(record, 'text', unicode(record))
-        return self.render_link(url, value, {
+        return self.render_link(url, record, value, {
             'data-pk': record.pk,
             'data-text': text,
         })

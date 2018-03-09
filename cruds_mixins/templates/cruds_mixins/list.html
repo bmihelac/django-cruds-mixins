@@ -1,0 +1,37 @@
+{% extends base_template|default:"cruds_mixins/base.html" %}
+{% load i18n %}
+{% load render_table from django_tables2 %}
+
+{% block main %}
+
+<h1 class="page-header">
+  {{ title }}
+</h1>
+
+{% block list_actions %}
+  {% include "cruds_mixins/partials/actions.html" %}
+{% endblock %}
+
+{% include "cruds_mixins/partials/filter.html" %}
+
+{% render_table table %}
+
+{% if bulk_action_actions %}
+
+  <form action="{{ bulk_action_url|default:"" }}" method="POST" data-select-table>
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+  {% include "cruds_mixins/partials/bulk_actions.html" with num=object_list.count %}
+  </form>
+{% endif %}
+
+{% if paginator %}
+  <p>
+    {% blocktrans with count=paginator.count display=object_list.count %}{{count}} results. Displaying: {{display}}.{% endblocktrans %}
+  </p>
+{% endif %}
+
+{% include "cruds_mixins/partials/pagination.html" %}
+
+{% endblock %}
