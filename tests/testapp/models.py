@@ -6,6 +6,10 @@ from cruds import utils as cruds_utils
 class Author(models.Model):
     name = models.CharField(max_length=100)
     birthday = models.DateTimeField()
+    active = models.BooleanField(
+        'active',
+        default=False,
+    )
 
     def __str__(self):
         return self.name

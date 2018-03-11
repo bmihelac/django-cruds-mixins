@@ -7,6 +7,10 @@
   </head>
   <body>
 
+    {% block messsages %}
+      {% include "cruds_mixins/partials/messages.html" %}
+    {% endblock messsages %}
+
     {% block main %}
     {% endblock main %}
 

@@ -179,6 +179,6 @@ class MyBooleanColumn(BooleanColumn):
         value = bool(value)
         text = self.yesno[int(not value)]
         html = '<span %s>%s</span>'
-        attrs = {"class": 'boolean-icon--' + value.lower()}
+        attrs = {"class": 'boolean-icon--' + str(value).lower()}
         attrs.update(self.attrs.get("span", {}))
         return mark_safe(html % (AttributeDict(attrs).as_html(), text))

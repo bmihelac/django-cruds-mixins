@@ -60,9 +60,24 @@ class IntegrationTest(WebTest):
         )
         url = cruds_utils.crud_url(Author, cruds_utils.ACTION_LIST)
         response = self.app.get(url)
-        form = response.form
+        form = response.forms[0]
         form['name'] = 'foo'
         response = form.submit()
         self.assertEqual(response.status_code, 200)
-        from .browser import display; display(response.content)
         self.assertContains(response, 'BarFoo')
+
+    def test_bulk_actions(self):
+        Author.objects.create(
+            name='BarFoo',
+            birthday=date(2000, 1, 1)
+        )
+        url = cruds_utils.crud_url(Author, cruds_utils.ACTION_LIST)
+        response = self.app.get(url)
+
+        form = response.forms[1]
+        form['select_all'] = True
+        response = form.submit(name='action', value='bulk_activate')
+        self.assertEqual(response.status_code, 302)
+
+        response = response.follow()
+        self.assertContains(response, 'Bulk activate successful')
