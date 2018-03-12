@@ -48,3 +48,6 @@ docs/_build
 
 # pyenv
 .python-version
+
+# pytest
+.pytest_cache/
