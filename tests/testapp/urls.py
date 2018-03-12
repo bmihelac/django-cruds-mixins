@@ -1,17 +1,26 @@
 from cruds.urls import crud_urls
 
-from .models import Author
+from .models import (
+    Author,
+    Country,
+)
 
 from cruds_mixins.views import crud
 from . import views
 
+
+urlpatterns = crud_urls(
+    Country,
+    detail_view=crud.CRUDDetailView.as_view(model=Country),
+    url_prefix='country/',
+)
 
 fields = [
     'name',
     'birthday',
 ]
 
-urlpatterns = crud_urls(
+urlpatterns += crud_urls(
     Author,
     list_view=views.AuthorListView.as_view(),
     create_view=crud.CRUDCreateView.as_view(model=Author, fields=fields),
