@@ -40,7 +40,6 @@ class IntegrationTest(WebTest):
         self.assertContains(response, 'foo bar')
 
         edit_label = _('edit')
-
         self.assertContains(response, edit_label)
         response = response.click(edit_label)
 
@@ -52,6 +51,19 @@ class IntegrationTest(WebTest):
         self.assertEqual(response.status_code, 302)
         response = response.follow()
         self.assertContains(response, 'BarFoo')
+
+        edit_label = _('edit')
+        self.assertContains(response, edit_label)
+        response = response.click(edit_label)
+        delete_label = _('delete')
+        self.assertContains(response, delete_label)
+        response = response.click(delete_label)
+        form = response.form
+        response = form.submit()
+        response = response.follow()
+        self.assertContains(response, _('Record has been deleted.'))
+        self.assertNotContains(response, 'BarFoo')
+
 
     def test_filters(self):
         Author.objects.create(

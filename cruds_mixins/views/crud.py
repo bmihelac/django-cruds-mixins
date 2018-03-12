@@ -131,7 +131,7 @@ class CRUDMixin(object):
             return None
         try:
             return self.get_action(
-                _('edit'),
+                _('delete'),
                 self.get_delete_url(),
                 css_class='btn btn-danger',
             )
