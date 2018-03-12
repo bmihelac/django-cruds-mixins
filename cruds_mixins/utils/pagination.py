@@ -15,9 +15,3 @@ def pagination_getvars(query, page_key='page'):
     if not getvars:
         return ""
     return "&" + urlencode(getvars, True)
-
-
-if __name__ == "__main__":
-
-    import doctest
-    doctest.testmod()
