@@ -29,5 +29,5 @@ class TestCRUDListView(BaseTestCase):
         request.user = AnonymousUser
         response = view(request)
         response.render()
-        from .browser import display; display(response.content)
-        # self.assertMatchSnapshot(response.content)
+        # from .browser import display; display(response.content)
+        self.assertMatchSnapshot(response.content)
