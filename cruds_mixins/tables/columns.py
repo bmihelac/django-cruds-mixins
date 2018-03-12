@@ -1,12 +1,9 @@
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import force_text
 from django.db import models
 from django.urls import (
     NoReverseMatch,
     reverse,
 )
-from django_tables2.utils import AttributeDict
 
 from django_tables2.columns.base import library
 from django_tables2.columns.linkcolumn import (
@@ -16,7 +13,6 @@ from django_tables2.columns.linkcolumn import (
 from django_tables2.columns import (
     CheckBoxColumn,
     Column,
-    BooleanColumn,
 )
 from cruds.utils import (
     crud_url_name,
@@ -111,74 +107,3 @@ class SelectionColumn(CheckBoxColumn):
             'orderable': False,
         }
         super(SelectionColumn, self).__init__(*args, **mykwargs)
-
-
-class LinkDetail(BaseLinkColumn):
-    """
-    Render column as link to detail view.
-    """
-
-    def render(self, value, record, bound_column):
-        try:
-            url = record.get_absolute_url()
-        except NoReverseMatch:
-            return value
-        except AttributeError:
-            return value
-        text = getattr(record, 'text', unicode(record))
-        return self.render_link(url, record, value, {
-            'data-pk': record.pk,
-            'data-text': text,
-        })
-
-
-class StatusColumn(Column):
-    """
-    Display choice.
-    """
-
-    def __init__(self, field_name, choices, *args, **kwargs):
-        self.field_name = field_name
-        self.choices = choices
-        super(StatusColumn, self).__init__(*args, **kwargs)
-
-    def render(self, value, record, *args, **kwargs):
-        value = getattr(record, self.field_name)
-        label = self.choices[value]
-        return label
-
-
-class ManyToManyColumn(Column):
-    #Using of m2m and related set in accessor quietly fails with Django 1.7 and later
-    #https://github.com/bradleyayers/django-tables2/issues/229
-
-    def __init__(self, m2m_field, *args, **kwargs):
-        kwargs['orderable'] = False
-        kwargs['accessor'] = 'id'
-        self.m2m_field = m2m_field
-        super(ManyToManyColumn, self).__init__(*args, **kwargs)
-
-    def render(self, value, record, *args, **kwargs):
-        return ", ".join([force_text(item)
-                          for item in getattr(record, self.m2m_field).all()])
-
-
-@library.register
-class MyBooleanColumn(BooleanColumn):
-    """Boolean column with fa icons.
-    """
-    def __init__(self, null=False, yesno=None, **kwargs):
-        if yesno is None:
-            yesno = (
-                mark_safe('<i class="fa fa-check" aria-hidden="true"></i>'),
-                mark_safe('<i class="fa fa-times" aria-hidden="true"></i>'),
-            )
-        super(MyBooleanColumn, self).__init__(null, yesno, **kwargs)
-
-    def render(self, value):
-        value = bool(value)
-        text = self.yesno[int(not value)]
-        html = '<span %s>%s</span>'
-        attrs = {"class": 'boolean-icon--' + str(value).lower()}
-        attrs.update(self.attrs.get("span", {}))
-        return mark_safe(html % (AttributeDict(attrs).as_html(), text))
