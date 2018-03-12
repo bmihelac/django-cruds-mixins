@@ -17,34 +17,6 @@ from .bulk_actions import BulkActionsMixin
 DEFAULT_SKIP_FIELDS = ['id', 'created', 'modified', 'created_by', 'updated_by']
 
 
-class PopupListMixin(object):
-    """
-    Allows list view in popup.
-    """
-
-    def get_context_data(self, *args, **kwargs):
-        ctx = super(PopupListMixin, self).get_context_data(*args, **kwargs)
-        if self.is_popup:
-            ctx['is_popup'] = 1
-            ctx['base_template'] = 'popup.html'
-        return ctx
-
-    def get_table(self, *args, **kwargs):
-        table = super(PopupListMixin, self).get_table(*args, **kwargs)
-        if self.is_popup:
-            table.is_popup = True
-            # hide view_link column
-            col = table.base_columns.get('view_link', None)
-            if col:
-                col.visible = False
-            # all links in table should make selection
-        return table
-
-    def get(self, request, *args, **kwargs):
-        self.is_popup = request.GET.get('popup', False)
-        return super(PopupListMixin, self).get(request, *args, **kwargs)
-
-
 class TableView(BulkActionsMixin, ListView):
     """
     Mixin adds a table with current queryset to context.
@@ -107,11 +79,8 @@ class BulkSelectionView(TemplateView):
     View that display intermediate page with form and process selection on
     form valid.
     """
-    template_name = 'crud/bulk_selection_form.html'
+    template_name = 'cruds_mixins/bulk_selection_form.html'
     form_class = None
-
-    def get_title(self):
-        return _('add to group')
 
     def add_message(self, msg):
         """
