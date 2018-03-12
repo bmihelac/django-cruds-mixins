@@ -1,5 +1,8 @@
 from django import forms
-from django.http import HttpResponseRedirect
+from django.http import (
+    HttpResponseRedirect,
+    HttpResponseBadRequest,
+)
 
 from .navigation import (
     NavigationItem,
@@ -54,18 +57,10 @@ class BulkActionsMixin(object):
         ids = self.request.POST.getlist('selection')
         return ids
 
-    def get_export_queryset(self):
-        return self.get_queryset()
-
     def get_bulk_queryset(self, select_all, selection):
         if select_all:
-            return self.get_export_queryset()
-        return self.get_export_queryset().filter(id__in=selection)
-
-    def get_bulk_action_name(self):
-        """
-        """
-        return self.request.POST.get('action')
+            return self.get_queryset()
+        return self.get_queryset().filter(id__in=selection)
 
     def get_bulk_action(self, action_name):
         if action_name not in self.get_bulk_action_methods():
@@ -79,6 +74,8 @@ class BulkActionsMixin(object):
         assert form.is_valid()
         data = form.cleaned_data
         action = self.get_bulk_action(data['action'])
+        if action is None:
+            return HttpResponseBadRequest('invalid action')
         queryset = self.get_bulk_queryset(data['select_all'], selection)
         resp = action(
             request=request,

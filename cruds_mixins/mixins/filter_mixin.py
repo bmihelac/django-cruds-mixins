@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from itertools import chain
 
 from ..conf import CrudsMixinsConf
 from ..utils.filters import filterset_factory
@@ -23,7 +22,10 @@ class FilterMixin(object):
     def get_filterset_fields(self):
         if self.filterset_fields:
             return self.filterset_fields
-        exclude = CrudsMixinsConf.DEFAULT_SKIP_FIELDS + (self.filterset_exclude_fields or [])
+        exclude = chain(
+            CrudsMixinsConf.DEFAULT_SKIP_FIELDS,
+            (self.filterset_exclude_fields or ())
+        )
         return [field.name for field in self.model._meta.fields
                 if field.name not in exclude]
 
@@ -59,8 +61,6 @@ class FilterMixin(object):
 
     def get_context_data(self, **kwargs):
         ctx = super(FilterMixin, self).get_context_data(**kwargs)
-        if hasattr(self, 'filter'):
-            ctx['filter'] = self.filter
-            ctx['getvars'] = pagination_getvars(
-                self.request.META['QUERY_STRING'])
+        ctx['filter'] = self.filter
+        ctx['getvars'] = pagination_getvars(self.request.META['QUERY_STRING'])
         return ctx
