@@ -6,7 +6,6 @@ from cruds_mixins.mixins.bulk_actions import (
     BulkSelectionBaseForm
 )
 
-
 from .models import Author
 
 

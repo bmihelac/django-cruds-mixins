@@ -7,10 +7,15 @@ from .models import (
 
 from cruds_mixins.views import crud
 from . import views
+from . import tables
 
 
 urlpatterns = crud_urls(
     Country,
+    list_view=crud.CRUDListView.as_view(
+        model=Country,
+        table=tables.CountryTable,
+    ),
     detail_view=crud.CRUDDetailView.as_view(model=Country),
     url_prefix='country/',
 )
