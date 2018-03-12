@@ -51,3 +51,6 @@ docs/_build
 
 # pytest
 .pytest_cache/
+
+#test database
+database.db
