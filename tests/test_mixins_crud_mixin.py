@@ -1,7 +1,8 @@
-from django.test import RequestFactory
+from django.test import RequestFactory, override_settings
 from django.contrib.auth.models import AnonymousUser
 from django.test.testcases import TestCase
 from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import ListView, DetailView
 
 from cruds_mixins import permission_classes
 from cruds_mixins.views.crud import CRUDMixin
@@ -16,6 +17,13 @@ from .test_helper import (
 
 
 class CRUDMixinTestCase(TestCase):
+
+    def setUp(self):
+        self.author = create_author()
+        self.factory = RequestFactory()
+        self.anonymous_user = AnonymousUser()
+        self.request = self.factory.get('')
+        self.request.user = self.anonymous_user
 
     def test_get_permissions_default(self):
         crud_mixin = CRUDMixin()
@@ -35,31 +43,55 @@ class CRUDMixinTestCase(TestCase):
         )
 
     def test_get_urls(self):
-        instance = create_author()
-
         class MyView(CRUDMixin):
             model = Author
 
         view = MyView()
         view.get_list_url()
         view.get_create_url()
-        view.get_update_url(instance)
-        view.get_detail_url(instance)
-        view.get_delete_url(instance)
+        view.get_update_url(self.author)
+        view.get_detail_url(self.author)
+        view.get_delete_url(self.author)
 
     def test_get_actions_without_permissions(self):
-        request = RequestFactory().get('')
-        request.user = AnonymousUser
-
-        class MyView(CRUDMixin, SingleObjectMixin):
+        class MyView(CRUDMixin, DetailView):
             model = Author
             permission_class = AllowNoone
 
-        view = MyView()
-        view.request = request
-        view.kwargs = {
-            'pk': create_author().pk,
-        }
-        self.assertIsNone(view.get_update_action())
-        self.assertIsNone(view.get_delete_action())
-        self.assertIsNone(view.get_create_action())
+            def get(self, request, *args, **kwargs):
+                self.object = self.get_object()
+                return [
+                    self.get_update_action(),
+                    self.get_delete_action(),
+                    self.get_create_action(),
+                ]
+
+        result = MyView.as_view()(self.request, pk=self.author.pk)
+        self.assertEqual(result, [None] * 3)
+
+    @override_settings(ROOT_URLCONF=[])
+    def test_get_actions_no_reverse_match(self):
+
+        class MyView(CRUDMixin, DetailView):
+            model = Author
+
+            def get(self, request, *args, **kwargs):
+                self.object = self.get_object()
+                return [
+                    self.get_update_action(),
+                    self.get_delete_action(),
+                    self.get_create_action(),
+                ]
+
+        result = MyView.as_view()(self.request, pk=self.author.pk)
+        self.assertEqual(result, [None] * 3)
+
+    def test_base_template(self):
+
+        class MyView(CRUDMixin, ListView):
+            model = Author
+            base_template = 'test_base.html'
+
+        view = MyView.as_view()
+        response = view(self.factory.get(''))
+        self.assertIn('base_template', response.context_data)

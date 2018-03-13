@@ -168,7 +168,7 @@ class CRUDMixin(object):
 
     def get_template_names(self):
         template_names = super(CRUDMixin, self).get_template_names()
-        if hasattr(self, 'default_template_name'):
+        if self.default_template_name:
             template_names.append(self.default_template_name)
         return template_names
 
@@ -264,7 +264,7 @@ class CRUDDetailView(CRUDMixin, UserPassesTestMixin,
 
 class CRUDCreateView(CRUDMixin, UserPassesTestMixin, CreateView):
     default_template_name = 'cruds_mixins/form.html'
-    add_message = False
+    add_message = True
 
     def test_func(self):
         return self.can_create()
@@ -280,7 +280,7 @@ class CRUDCreateView(CRUDMixin, UserPassesTestMixin, CreateView):
 
 class CRUDUpdateView(CRUDMixin, UserPassesTestMixin, ActionsMixin, UpdateView):
     default_template_name = 'cruds_mixins/form.html'
-    add_message = False
+    add_message = True
 
     def test_func(self):
         return self.can_update()
