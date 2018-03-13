@@ -69,9 +69,8 @@ class ViewLinkColumn(LinkColumn):
         if self.action:
             url = crud_url(record, self.action)
             return self.render_link(url, record, self.action_name)
-        if hasattr(record, 'get_absolute_url'):
-            url = record.get_absolute_url()
-            return self.render_link(url, record, self.action_name)
+        return self.render_link(record.get_absolute_url(),
+                                record, self.action_name)
 
 
 class SelectionColumn(CheckBoxColumn):

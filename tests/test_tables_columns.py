@@ -49,12 +49,19 @@ class ViewLinkColumnTest(BaseTestCase):
     def test_action_name(self):
         table = self.get_table(columns.ViewLinkColumn(
             action_name='edit',
-            action=cruds_utils.ACTION_UPDATE
+            action=cruds_utils.ACTION_UPDATE,
+            verbose_name='action',
         ))
+        self.assertEqual(
+            table.columns[0].verbose_name, 'action'
+        )
         self.assertEqual(
             table.rows[0].get_cell('view_link'),
             '<a href="/author/%d/edit/">edit</a>' % self.author.pk
         )
+
+    def test_with_accessor(self):
+        self.get_table(columns.ViewLinkColumn(accessor='pk'))
 
 
 class FKColumnTest(BaseTestCase):
