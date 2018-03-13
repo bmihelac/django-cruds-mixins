@@ -1,5 +1,7 @@
 from datetime import date
 
+import rules
+
 from .testapp.models import Author
 
 
@@ -12,6 +14,7 @@ def create_author(**kwargs):
     return Author.objects.create(**defaults)
 
 
-def reset_ruleset(ruleset):
+def reset_ruleset():
+    ruleset = rules.permissions.permissions
     for k in list(ruleset.keys()):
         ruleset.pop(k)

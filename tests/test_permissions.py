@@ -2,7 +2,6 @@ from django.test.testcases import TestCase
 from django.contrib.auth.models import AnonymousUser, User
 
 import rules
-from cruds import utils as cruds_utils
 from cruds_mixins import permission_classes
 from cruds_mixins.utils.rules import add_crud_perms
 from .testapp.models import Author
@@ -132,7 +131,7 @@ class RulesPermissionsTest(BaseTestCase):
 
     def setUp(self):
         super(RulesPermissionsTest, self).setUp()
-        reset_ruleset(rules.permissions.permissions)
+        reset_ruleset()
         add_crud_perms(
             Author,
             list_predicate=rules.always_allow,

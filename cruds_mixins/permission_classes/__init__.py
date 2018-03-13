@@ -39,6 +39,26 @@ class AllowAny(PermissionClass):
         return True
 
 
+class AllowNoone(PermissionClass):
+    """Allows all actions to anyone.
+    """
+
+    def can_list(self, user, model, view=None):
+        return False
+
+    def can_create(self, user, model, view=None):
+        return False
+
+    def can_update(self, user, model, instance, view=None):
+        return False
+
+    def can_detail(self, user, model, instance, view=None):
+        return False
+
+    def can_delete(self, user, model, instance, view=None):
+        return False
+
+
 class IsStaffOrReadOnly(PermissionClass):
     """Anyone has read only access, staff can change.
     """

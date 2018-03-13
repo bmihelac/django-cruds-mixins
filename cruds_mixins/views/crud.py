@@ -91,14 +91,14 @@ class CRUDMixin(UserPassesTestMixin):
     def get_create_url(self):
         return cruds_utils.crud_url(self.model, cruds_utils.ACTION_CREATE)
 
-    def get_update_url(self):
-        return cruds_utils.crud_url(self.object, cruds_utils.ACTION_UPDATE)
+    def get_update_url(self, instance):
+        return cruds_utils.crud_url(instance, cruds_utils.ACTION_UPDATE)
 
-    def get_detail_url(self):
-        return cruds_utils.crud_url(self.object, cruds_utils.ACTION_DETAIL)
+    def get_detail_url(self, instance):
+        return cruds_utils.crud_url(instance, cruds_utils.ACTION_DETAIL)
 
-    def get_delete_url(self):
-        return cruds_utils.crud_url(self.object, cruds_utils.ACTION_DELETE)
+    def get_delete_url(self, instance):
+        return cruds_utils.crud_url(instance, cruds_utils.ACTION_DELETE)
 
     # queryset
     def get_base_queryset(self):
@@ -145,7 +145,7 @@ class CRUDMixin(UserPassesTestMixin):
         try:
             return self.get_action(
                 _('edit'),
-                self.get_update_url()
+                self.get_update_url(self.object)
             )
         except NoReverseMatch:
             return None
@@ -156,7 +156,7 @@ class CRUDMixin(UserPassesTestMixin):
         try:
             return self.get_action(
                 _('delete'),
-                self.get_delete_url(),
+                self.get_delete_url(self.object),
                 css_class='btn btn-danger',
             )
         except NoReverseMatch:
