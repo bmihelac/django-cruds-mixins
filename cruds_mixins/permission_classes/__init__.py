@@ -1,4 +1,3 @@
-import rules
 from cruds import utils as cruds_utils
 
 

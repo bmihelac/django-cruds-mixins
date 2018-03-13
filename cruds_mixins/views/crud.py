@@ -12,7 +12,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from rules.contrib.views import PermissionRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 from cruds import utils as cruds_utils
 from ..conf import CrudsMixinsConf
@@ -25,7 +25,7 @@ from ..mixins.tables import TableView
 from ..mixins.filter_mixin import FilterMixin
 
 
-class CRUDMixin(object):
+class CRUDMixin(UserPassesTestMixin):
     """
     Define `for_user` manager method for model.
     Define rules app_model_action
@@ -75,7 +75,6 @@ class CRUDMixin(object):
             self.get_object(),
             self
         )
-
 
     def can_delete(self):
         return self.get_permissions().can_delete(
@@ -242,16 +241,19 @@ class CRUDListView(CRUDMixin,
                    ActionsMixin, FilterMixin, TableView):
     default_template_name = 'cruds_mixins/list.html'
 
+    def test_func(self):
+        return self.can_list()
+
     def get_actions(self):
         return [self.get_create_action()]
-
-    def test_func(self, user):
-        return self.test_func_list(user)
 
 
 class CRUDDetailView(CRUDMixin,
                      ActionsMixin, DetailView):
     default_template_name = 'cruds_mixins/detail.html'
+
+    def test_func(self):
+        return self.can_detail()
 
     def get_title(self):
         return str(self.object)
@@ -259,13 +261,13 @@ class CRUDDetailView(CRUDMixin,
     def get_actions(self):
         return [self.get_update_action()]
 
-    def test_func(self, user):
-        return self.test_func_detail(user)
-
 
 class CRUDCreateView(CRUDMixin, CreateView):
     default_template_name = 'cruds_mixins/form.html'
     add_message = False
+
+    def test_func(self):
+        return self.can_create()
 
     def get_title(self):
         return create_model_title(self.model)
@@ -275,13 +277,13 @@ class CRUDCreateView(CRUDMixin, CreateView):
             return None
         return (_('Object %s has been created') % self.object, messages.INFO)
 
-    def test_func(self, user):
-        return self.test_func_create(user)
-
 
 class CRUDUpdateView(CRUDMixin, ActionsMixin, UpdateView):
     default_template_name = 'cruds_mixins/form.html'
     add_message = False
+
+    def test_func(self):
+        return self.can_update()
 
     def get_title(self):
         return _('Edit %(object)s') % {'object': str(self.object)}
@@ -291,9 +293,6 @@ class CRUDUpdateView(CRUDMixin, ActionsMixin, UpdateView):
             return None
         return (_('Object %s has been updated') % self.object, messages.INFO)
 
-    def test_func(self, user):
-        return self.test_func_update(user)
-
     def get_actions(self):
         return [self.get_delete_action()]
 
@@ -301,14 +300,14 @@ class CRUDUpdateView(CRUDMixin, ActionsMixin, UpdateView):
 class CRUDDeleteView(CRUDMixin, DeleteView):
     default_template_name = 'cruds_mixins/delete.html'
 
+    def test_func(self):
+        return self.can_delete()
+
     def get_title(self):
         return _('Delete %(model)s: %(object)s') % {
             'model': str(self.object._meta.verbose_name),
             'object': str(self.object),
         }
-
-    def test_func(self, user):
-        return self.test_func_delete(user)
 
     def get_success_url(self):
         return reverse(cruds_utils.crud_url_name(self.model, 'list'))
