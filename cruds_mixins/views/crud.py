@@ -190,13 +190,6 @@ class CRUDMixin(object):
         """
 
     # messages
-    def get_message(self):
-        """Returns msg, msg_type tuple or None if no message should be added.
-
-        :returns: (msg, msg_type)
-        """
-        return None
-
     def add_message_and_redirect(self, msg, url, msg_type=None, extra_tags=''):
         if not msg_type:
             msg_type = messages.INFO
@@ -207,6 +200,13 @@ class CRUDMixin(object):
         return self.add_message_and_redirect(msg, url, messages.ERROR, 'danger')
 
     # form handling
+    def get_message(self):
+        """Returns msg, msg_type tuple or None if no message should be added.
+
+        :returns: (msg, msg_type)
+        """
+        raise NotImplementedError
+
     def form_valid(self, form):
         """
         Calls ``update_instance``, adds message if defined.
@@ -264,7 +264,6 @@ class CRUDDetailView(CRUDMixin, UserPassesTestMixin,
 
 class CRUDCreateView(CRUDMixin, UserPassesTestMixin, CreateView):
     default_template_name = 'cruds_mixins/form.html'
-    add_message = True
 
     def test_func(self):
         return self.can_create()
@@ -273,14 +272,11 @@ class CRUDCreateView(CRUDMixin, UserPassesTestMixin, CreateView):
         return create_model_title(self.model)
 
     def get_message(self):
-        if not self.add_message:
-            return None
         return (_('Object %s has been created') % self.object, messages.INFO)
 
 
 class CRUDUpdateView(CRUDMixin, UserPassesTestMixin, ActionsMixin, UpdateView):
     default_template_name = 'cruds_mixins/form.html'
-    add_message = True
 
     def test_func(self):
         return self.can_update()
@@ -289,8 +285,6 @@ class CRUDUpdateView(CRUDMixin, UserPassesTestMixin, ActionsMixin, UpdateView):
         return _('Edit %(object)s') % {'object': str(self.object)}
 
     def get_message(self):
-        if not self.add_message:
-            return None
         return (_('Object %s has been updated') % self.object, messages.INFO)
 
     def get_actions(self):
