@@ -1,7 +1,5 @@
 from django_webtest import WebTest
 
-from datetime import date
-
 from django.utils.translation import ugettext as _
 
 from cruds import utils as cruds_utils
@@ -11,6 +9,7 @@ from cruds_mixins.utils.text import (
 )
 
 from .testapp.models import Author
+from . import test_helper
 
 
 class IntegrationTest(WebTest):
@@ -64,12 +63,8 @@ class IntegrationTest(WebTest):
         self.assertContains(response, _('Record has been deleted.'))
         self.assertNotContains(response, 'BarFoo')
 
-
     def test_filters(self):
-        Author.objects.create(
-            name='BarFoo',
-            birthday=date(2000, 1, 1)
-        )
+        self.author = test_helper.create_author(name='BarFoo')
         url = cruds_utils.crud_url(Author, cruds_utils.ACTION_LIST)
         response = self.app.get(url)
         form = response.forms[0]
@@ -79,10 +74,7 @@ class IntegrationTest(WebTest):
         self.assertContains(response, 'BarFoo')
 
     def test_bulk_actions(self):
-        Author.objects.create(
-            name='BarFoo',
-            birthday=date(2000, 1, 1)
-        )
+        self.author = test_helper.create_author()
         url = cruds_utils.crud_url(Author, cruds_utils.ACTION_LIST)
         response = self.app.get(url)
 
@@ -95,10 +87,7 @@ class IntegrationTest(WebTest):
         self.assertContains(response, 'Bulk activate successful')
 
     def test_bulk_actions_with_intermediate_view(self):
-        Author.objects.create(
-            name='BarFoo',
-            birthday=date(2000, 1, 1)
-        )
+        self.author = test_helper.create_author()
         url = cruds_utils.crud_url(Author, cruds_utils.ACTION_LIST)
         response = self.app.get(url)
 

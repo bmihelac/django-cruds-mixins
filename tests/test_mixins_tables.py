@@ -1,5 +1,3 @@
-from datetime import date
-
 from django.test import RequestFactory
 from snapshottest.django import TestCase
 
@@ -9,16 +7,14 @@ from cruds_mixins.mixins.tables import (
 
 from .testapp.models import Author
 from .testapp.tables import AuthorTable
+from . import test_helper
 
 
 class TablesTest(TestCase):
 
     def setUp(self):
         self.factory = RequestFactory()
-        self.author = Author.objects.create(
-            name='Foo bar',
-            birthday=date(2000, 1, 1),
-        )
+        self.author = test_helper.create_author()
 
     def test_default(self):
         request = self.factory.get('')

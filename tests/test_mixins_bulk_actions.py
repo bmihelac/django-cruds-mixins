@@ -14,6 +14,7 @@ from cruds_mixins.mixins.bulk_actions import (
 )
 
 from .testapp.models import Author
+from . import test_helper
 
 
 class MyView(BulkActionsMixin, ListView):
@@ -31,14 +32,8 @@ class BulkActionsMixinTest(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.view = MyView.as_view()
-        self.author = Author.objects.create(
-            name='Foo bar',
-            birthday=date(2000, 1, 1),
-        )
-        self.author2 = Author.objects.create(
-            name='fuu',
-            birthday=date(2000, 1, 1),
-        )
+        self.author = test_helper.create_author()
+        self.author2 = test_helper.create_author(name='fuu')
 
     def test_selection(self):
         with patch.object(MyView, 'test_bulk_action', return_value=None) as mock_method:

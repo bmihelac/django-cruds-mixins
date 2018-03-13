@@ -35,7 +35,7 @@ class Country(models.Model):
 
 class Author(models.Model):
     name = models.CharField(max_length=100)
-    birthday = models.DateTimeField()
+    birthday = models.DateField()
     country = models.ForeignKey(
         Country,
         verbose_name=Country._meta.verbose_name,

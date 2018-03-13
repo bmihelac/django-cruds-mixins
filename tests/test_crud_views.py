@@ -1,7 +1,5 @@
-from datetime import date
-
 from django.test import RequestFactory
-from django.contrib.auth.models import AnonymousUser, User
+from django.contrib.auth.models import AnonymousUser
 from snapshottest.django import TestCase
 
 from cruds_mixins.views.crud import (
@@ -9,16 +7,14 @@ from cruds_mixins.views.crud import (
 )
 
 from .testapp.models import Author
+from . import test_helper
 
 
 class BaseTestCase(TestCase):
 
     def setUp(self):
         self.factory = RequestFactory()
-        self.author = Author.objects.create(
-            name='Foo bar',
-            birthday=date(2000, 1, 1),
-        )
+        self.author = test_helper.create_author()
 
 
 class TestCRUDListView(BaseTestCase):
