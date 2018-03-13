@@ -61,6 +61,25 @@ class AllowAnyTest(BaseTestCase):
         ))
 
 
+class AllowNoone(BaseTestCase):
+
+    def get_permissions(self):
+        return permission_classes.AllowNoone()
+
+    def test_can_list(self):
+        self.assertFalse(self.permissions.can_list(
+            self.anonymous_user,
+            Author
+        ))
+
+    def test_can_detail(self):
+        self.assertFalse(self.permissions.can_detail(
+            self.anonymous_user,
+            Author,
+            self.author
+        ))
+
+
 class IsStaffOrReadOnlyTest(BaseTestCase):
 
     def setUp(self):
