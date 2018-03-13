@@ -2,6 +2,7 @@ from django.shortcuts import (
     redirect,
 )
 from django.contrib import messages
+from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse, NoReverseMatch
 from django.http import HttpResponseRedirect
@@ -14,6 +15,7 @@ from django.views.generic import (
 from rules.contrib.views import PermissionRequiredMixin
 
 from cruds import utils as cruds_utils
+from ..conf import CrudsMixinsConf
 from ..utils.text import create_model_title
 from ..mixins.navigation import (
     ActionsMixin,
@@ -23,19 +25,6 @@ from ..mixins.tables import TableView
 from ..mixins.filter_mixin import FilterMixin
 
 
-class CRUDPermissionRequiredMixin(PermissionRequiredMixin):
-    raise_exception = True
-
-    def get_permission_required(self):
-        raise NotImplementedError
-
-    def can_create(self):
-        return self.request.user.has_perm(
-            cruds_utils.crud_permission_name(self.model, cruds_utils.ACTION_CREATE),
-            self.get_object(),
-        )
-
-
 class CRUDMixin(object):
     """
     Define `for_user` manager method for model.
@@ -43,22 +32,58 @@ class CRUDMixin(object):
     """
     base_template = None
     default_template_name = None
+    permission_class = None
+    _permissions = None
 
     # permissions
+    def get_permissions(self):
+        if self._permissions:
+            return self._permissions
+        if self.permission_class:
+            self._permissions = self.permission_class()
+        else:
+            self._permissions = import_string(
+                CrudsMixinsConf.DEFAULT_PERMISSION_CLASS)()
+        return self._permissions
+
     def can_list(self):
-        return True
+        return self.get_permissions().can_list(
+            self.request.user,
+            self.model,
+            self
+        )
 
     def can_create(self):
-        return True
+        return self.get_permissions().can_create(
+            self.request.user,
+            self.model,
+            self
+        )
 
     def can_update(self):
-        return True
+        return self.get_permissions().can_update(
+            self.request.user,
+            self.model,
+            self.get_object(),
+            self
+        )
 
     def can_detail(self):
-        return True
+        return self.get_permissions().can_detail(
+            self.request.user,
+            self.model,
+            self.get_object(),
+            self
+        )
+
 
     def can_delete(self):
-        return True
+        return self.get_permissions().can_delete(
+            self.request.user,
+            self.model,
+            self.get_object(),
+            self
+        )
 
     # urls
     def get_list_url(self):

@@ -61,4 +61,9 @@ MIDDLEWARE = (
 
 STATIC_URL = '/static/'
 
+AUTHENTICATION_BACKENDS = (
+    'rules.permissions.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 TEST_RUNNER = 'snapshottest.django.TestRunner'

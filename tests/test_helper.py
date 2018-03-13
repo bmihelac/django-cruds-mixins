@@ -10,3 +10,8 @@ def create_author(**kwargs):
     }
     defaults.update(kwargs)
     return Author.objects.create(**defaults)
+
+
+def reset_ruleset(ruleset):
+    for k in list(ruleset.keys()):
+        ruleset.pop(k)
