@@ -25,7 +25,7 @@ from ..mixins.tables import TableView
 from ..mixins.filter_mixin import FilterMixin
 
 
-class CRUDMixin(UserPassesTestMixin):
+class CRUDMixin(object):
     """
     Define `for_user` manager method for model.
     Define rules app_model_action
@@ -237,7 +237,7 @@ class CRUDMixin(UserPassesTestMixin):
         return self.get_next_url() or super(CRUDMixin, self).get_success_url()
 
 
-class CRUDListView(CRUDMixin,
+class CRUDListView(CRUDMixin, UserPassesTestMixin,
                    ActionsMixin, FilterMixin, TableView):
     default_template_name = 'cruds_mixins/list.html'
 
@@ -248,7 +248,7 @@ class CRUDListView(CRUDMixin,
         return [self.get_create_action()]
 
 
-class CRUDDetailView(CRUDMixin,
+class CRUDDetailView(CRUDMixin, UserPassesTestMixin,
                      ActionsMixin, DetailView):
     default_template_name = 'cruds_mixins/detail.html'
 
@@ -262,7 +262,7 @@ class CRUDDetailView(CRUDMixin,
         return [self.get_update_action()]
 
 
-class CRUDCreateView(CRUDMixin, CreateView):
+class CRUDCreateView(CRUDMixin, UserPassesTestMixin, CreateView):
     default_template_name = 'cruds_mixins/form.html'
     add_message = False
 
@@ -278,7 +278,7 @@ class CRUDCreateView(CRUDMixin, CreateView):
         return (_('Object %s has been created') % self.object, messages.INFO)
 
 
-class CRUDUpdateView(CRUDMixin, ActionsMixin, UpdateView):
+class CRUDUpdateView(CRUDMixin, UserPassesTestMixin, ActionsMixin, UpdateView):
     default_template_name = 'cruds_mixins/form.html'
     add_message = False
 
@@ -297,7 +297,7 @@ class CRUDUpdateView(CRUDMixin, ActionsMixin, UpdateView):
         return [self.get_delete_action()]
 
 
-class CRUDDeleteView(CRUDMixin, DeleteView):
+class CRUDDeleteView(CRUDMixin, UserPassesTestMixin, DeleteView):
     default_template_name = 'cruds_mixins/delete.html'
 
     def test_func(self):
