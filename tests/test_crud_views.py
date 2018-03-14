@@ -1,9 +1,12 @@
+from unittest import mock
+
 from django.test import RequestFactory
 from django.contrib.auth.models import AnonymousUser
 from snapshottest.django import TestCase
 
 from cruds_mixins.views.crud import (
     CRUDListView,
+    CRUDUpdateView,
 )
 
 from .testapp.models import Author
@@ -15,6 +18,7 @@ class BaseTestCase(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.author = test_helper.create_author()
+        self.anonymous_user = AnonymousUser()
 
 
 class TestCRUDListView(BaseTestCase):
@@ -27,3 +31,22 @@ class TestCRUDListView(BaseTestCase):
         response.render()
         # from .browser import display; display(response.content)
         self.assertMatchSnapshot(response.content)
+
+
+class CRUDUpdateViewTest(BaseTestCase):
+
+    @mock.patch('cruds_mixins.mixins.cruds.messages')
+    def test_without_message(self, mock_module):
+        class MyView(CRUDUpdateView):
+            model = Author
+            fields = ('name', )
+
+            def get_message(self):
+                return None
+
+        self.request = self.factory.post('', {
+            'name': 'aaa'
+        })
+        self.request.user = self.anonymous_user
+        MyView.as_view()(self.request, pk=self.author.pk)
+        self.assertFalse(mock_module.add_message.called)

@@ -2,13 +2,11 @@ from unittest import mock
 from django.test import RequestFactory, override_settings
 from django.contrib.auth.models import AnonymousUser
 from django.test.testcases import TestCase
-from django.views.generic.detail import SingleObjectMixin
 from django.views.generic import ListView, DetailView
 
 from cruds_mixins import permission_classes
-from cruds_mixins.views.crud import (
+from cruds_mixins.mixins.cruds import (
     CRUDMixin,
-    CRUDUpdateView,
 )
 from cruds_mixins.permission_classes import (
     AllowNoone,
@@ -102,7 +100,7 @@ class CRUDMixinTestCase(BaseTestCase):
         response = view(self.factory.get(''))
         self.assertIn('base_template', response.context_data)
 
-    @mock.patch('cruds_mixins.views.crud.messages')
+    @mock.patch('cruds_mixins.mixins.cruds.messages')
     def test_add_error_message_and_redirect(self, mock_module):
 
         class MyView(CRUDMixin, ListView):
@@ -114,22 +112,3 @@ class CRUDMixinTestCase(BaseTestCase):
         result = MyView.as_view()(self.request)
         self.assertTrue(mock_module.add_message.called)
         self.assertEqual(result.status_code, 302)
-
-
-class CRUDUpdateViewTest(BaseTestCase):
-
-    @mock.patch('cruds_mixins.views.crud.messages')
-    def test_without_message(self, mock_module):
-        class MyView(CRUDUpdateView):
-            model = Author
-            fields = ('name', )
-
-            def get_message(self):
-                return None
-
-        self.request = self.factory.post('', {
-            'name': 'aaa'
-        })
-        self.request.user = self.anonymous_user
-        MyView.as_view()(self.request, pk=self.author.pk)
-        self.assertFalse(mock_module.add_message.called)
