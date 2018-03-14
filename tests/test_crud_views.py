@@ -2,6 +2,7 @@ from unittest import mock
 
 from django.test import RequestFactory
 from django.contrib.auth.models import AnonymousUser
+from django.test.html import parse_html
 from snapshottest.django import TestCase
 
 from cruds_mixins.views.crud import (
@@ -30,7 +31,7 @@ class TestCRUDListView(BaseTestCase):
         response = view(request)
         response.render()
         # from .browser import display; display(response.content)
-        self.assertMatchSnapshot(response.content)
+        self.assertMatchSnapshot(parse_html(str(response.content)))
 
 
 class CRUDUpdateViewTest(BaseTestCase):
