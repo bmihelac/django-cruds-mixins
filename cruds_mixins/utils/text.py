@@ -1,5 +1,3 @@
-from datetime import date, timedelta
-
 from django.utils.translation import ugettext_lazy as _
 
 
