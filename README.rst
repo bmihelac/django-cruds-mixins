@@ -44,14 +44,27 @@ Install django-cruds-mixins::
 
     pip install django-cruds-mixins
 
-Add it to your `INSTALLED_APPS`:
+Add django-cruds-mixin and related apps to your `INSTALLED_APPS`:
 
 .. code-block:: python
 
     INSTALLED_APPS = (
         ...
-        'cruds_mixins.apps.CrudsMixinsConfig',
+        'rules',
+        'crispy_forms',
+        'django_tables2',
+        'cruds',
+        'cruds_mixins',
         ...
+    )
+
+Add the *django-rules* authentication backend for using permissions.
+
+.. code-block:: python
+
+    AUTHENTICATION_BACKENDS = (
+        'rules.permissions.ObjectPermissionBackend',
+        'django.contrib.auth.backends.ModelBackend',
     )
 
 Add django-cruds-mixins's URL patterns:
