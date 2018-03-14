@@ -11,7 +11,26 @@ django-cruds-mixins
 .. image:: https://codecov.io/gh/bmihelac/django-cruds-mixins/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/bmihelac/django-cruds-mixins
 
-Your project description goes here
+django-cruds-mixins integrates several libraries to enable easy, fast and
+predicatable creation of admin panels and applications.
+
+Features
+--------
+
+* list, create, update, detail, delete views for your models
+
+* customizable tables with orderable columns, pagination and automatic links
+  for ForeignKey fields, easily customizable with *django-tables2*
+
+* search fiters based on model fields with *django-filter*
+
+* permissions creation and integration with *django-rules*
+
+* advanced forms with *django-crispy-forms*
+
+* selections and bulk actions
+
+* utils for creating URLconfs, permissions, filtersets, tables
 
 Documentation
 -------------
@@ -47,11 +66,6 @@ Add django-cruds-mixins's URL patterns:
         url(r'^', include(cruds_mixins_urls)),
         ...
     ]
-
-Features
---------
-
-* TODO
 
 Running Tests
 -------------
