@@ -11,6 +11,8 @@ django-cruds-mixins
 .. image:: https://codecov.io/gh/bmihelac/django-cruds-mixins/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/bmihelac/django-cruds-mixins
 
+EXPRERIMENTAL SOFTWARE! Do not use!
+
 django-cruds-mixins integrates several libraries to enable easy, fast and
 predicatable creation of admin panels and applications.
 
