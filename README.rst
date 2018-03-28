@@ -50,7 +50,7 @@ Add django-cruds-mixin and related apps to your `INSTALLED_APPS`:
 
     INSTALLED_APPS = (
         ...
-        'rules',
+        'rules.apps.AutodiscoverRulesConfig',
         'crispy_forms',
         'django_tables2',
         'cruds',

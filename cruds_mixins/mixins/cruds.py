@@ -225,5 +225,3 @@ class CRUDMixin(object):
 
     def get_success_url(self):
         return self.get_next_url() or super(CRUDMixin, self).get_success_url()
-
-
