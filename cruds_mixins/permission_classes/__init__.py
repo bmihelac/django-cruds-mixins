@@ -98,6 +98,7 @@ class RulesPermissions(PermissionClass):
                 cruds_utils.ACTION_CREATE,
                 instance
             ),
+            instance,
         )
 
     def can_detail(self, user, model, instance, view=None):
@@ -107,6 +108,7 @@ class RulesPermissions(PermissionClass):
                 cruds_utils.ACTION_DETAIL,
                 instance
             ),
+            instance,
         )
 
     def can_delete(self, user, model, instance, view=None):
@@ -116,4 +118,5 @@ class RulesPermissions(PermissionClass):
                 cruds_utils.ACTION_DELETE,
                 instance
             ),
+            instance,
         )

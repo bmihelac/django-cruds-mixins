@@ -146,18 +146,26 @@ class IsStaffOrReadOnlyTest(BaseTestCase):
         ))
 
 
+@rules.predicate
+def allow_for_author_foo_bar(user, instance):
+    if instance is None:
+        return False
+    return instance.name == 'Foo bar'
+
+
 class RulesPermissionsTest(BaseTestCase):
 
     def setUp(self):
         super(RulesPermissionsTest, self).setUp()
         reset_ruleset()
+
         add_crud_perms(
             Author,
             list_predicate=rules.always_allow,
             create_predicate=rules.always_allow,
-            update_predicate=rules.always_allow,
-            detail_predicate=rules.always_allow,
-            delete_predicate=rules.always_allow,
+            update_predicate=allow_for_author_foo_bar,
+            detail_predicate=allow_for_author_foo_bar,
+            delete_predicate=allow_for_author_foo_bar,
         )
 
     def get_permissions(self):
