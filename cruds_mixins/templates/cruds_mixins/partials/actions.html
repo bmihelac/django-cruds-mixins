@@ -8,10 +8,10 @@
           {% if action.post %}
             <form class="action-form" action="{{ action.url }}" method="POST">
               {% csrf_token %}
-                <button type="submit" name="{{ action.action }}" value="{{ action.value }}" class="btn {{ action.css_class }}">{{ action.title }}</button>
+                <button type="submit" name="{{ action.action }}" value="{{ action.value }}" class="{{ action.css_class }}">{{ action.title }}</button>
             </form>
           {% else %}
-            <a href="{{ action.url }}" class="btn {{ action.css_class }} hidden-print">{{ action.title }}</a>
+            <a href="{{ action.url }}" class="{{ action.css_class }} hidden-print">{{ action.title }}</a>
           {% endif %}
         {% endif %}
       {% endif %}

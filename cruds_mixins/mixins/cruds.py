@@ -113,7 +113,7 @@ class CRUDMixin(object):
         data = {
             'title': title,
             'url': url,
-            'css_class': 'btn btn-default',
+            'css_class': CrudsMixinsConf.CSS_CLASS_BUTTON,
         }
         data.update(kwargs)
         return NavigationItem(**data)
@@ -124,7 +124,8 @@ class CRUDMixin(object):
         try:
             return self.get_action(
                 create_model_title(self.model),
-                self.get_create_url()
+                self.get_create_url(),
+                css_class=CrudsMixinsConf.CSS_CLASS_BUTTON_PRIMARY,
             )
         except NoReverseMatch:
             return None
@@ -135,7 +136,8 @@ class CRUDMixin(object):
         try:
             return self.get_action(
                 _('edit'),
-                self.get_update_url(self.object)
+                self.get_update_url(self.object),
+                css_class=CrudsMixinsConf.CSS_CLASS_BUTTON_PRIMARY,
             )
         except NoReverseMatch:
             return None
@@ -147,7 +149,7 @@ class CRUDMixin(object):
             return self.get_action(
                 _('delete'),
                 self.get_delete_url(self.object),
-                css_class='btn btn-danger',
+                css_class=CrudsMixinsConf.CSS_CLASS_BUTTON_DANGER,
             )
         except NoReverseMatch:
             return None
