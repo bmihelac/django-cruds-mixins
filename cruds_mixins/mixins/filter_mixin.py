@@ -6,11 +6,15 @@ from ..utils.pagination import pagination_getvars
 
 
 class FilterMixin(object):
-    """
+    """Filter mixin
 
         ``filterset`` - FilterSet class. Leave empty to create FilterSet
         dynamically.  If ``filterset`` is ``None`` filterset will not be
         created.
+        `filterset_fields` - whitelist of fields to use if `filterset`
+        is empty
+        `filterset_exclude_fields` - blacklist of fields to exclude if
+        `filterset` is empty
     """
     filterset = None
     filterset_fields = None
@@ -46,6 +50,7 @@ class FilterMixin(object):
         return filterset(
             data=data,
             queryset=queryset,
+            request=self.request,
             **filter_kwargs
         )
 
