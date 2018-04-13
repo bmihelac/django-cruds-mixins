@@ -64,6 +64,7 @@ setup(
         'django-appconf==1.0.2',
         'django-filter==1.1.0',
         'django-crispy-forms==1.7.2',
+        'django-import-export>=1.0.0',
     ],
     zip_safe=False,
     keywords='django-cruds-mixins',

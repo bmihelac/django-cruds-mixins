@@ -4,6 +4,7 @@ from django.http import (
     HttpResponseBadRequest,
 )
 
+from ..conf import CrudsMixinsConf
 from .navigation import (
     NavigationItem,
 )
@@ -49,7 +50,7 @@ class BulkActionsMixin(object):
                 title=title,
                 url=None,
                 code=action_name,
-                css_class='btn',
+                css_class=CrudsMixinsConf.CSS_CLASS_BUTTON,
             ))
         return actions
 
@@ -66,6 +67,11 @@ class BulkActionsMixin(object):
         if action_name not in self.get_bulk_action_methods():
             return None
         return getattr(self, action_name)
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(BulkActionsMixin, self).get_context_data(*args, **kwargs)
+        ctx['bulk_action_actions'] = self.get_bulk_action_actions()
+        return ctx
 
     def post(self, request, *args, **kwargs):
         form = BulkSelectionBaseForm(data=request.POST)
