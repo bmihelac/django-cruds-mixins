@@ -14,14 +14,15 @@
 
 {% include "cruds_mixins/partials/filter.html" %}
 
-{% render_table table %}
-
 {% if bulk_action_actions %}
-
   <form action="{{ bulk_action_url|default:"" }}" method="POST" data-select-table>
   {% csrf_token %}
   <input type="hidden" name="next" value="{{ request.get_full_path }}">
+{% endif %}
 
+{% render_table table %}
+
+{% if bulk_action_actions %}
   {% include "cruds_mixins/partials/bulk_actions.html" with num=object_list.count %}
   </form>
 {% endif %}
