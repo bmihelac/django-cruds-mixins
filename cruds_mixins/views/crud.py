@@ -6,7 +6,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin as UserPassesTestMixinBase
 
 from ..utils.text import create_model_title
 from ..mixins.navigation import (
@@ -15,6 +15,10 @@ from ..mixins.navigation import (
 from ..mixins.tables import TableView
 from ..mixins.filter_mixin import FilterMixin
 from ..mixins.cruds import CRUDMixin
+
+
+class UserPassesTestMixin(UserPassesTestMixinBase):
+    raise_exception = True
 
 
 class CRUDListView(CRUDMixin, UserPassesTestMixin,
