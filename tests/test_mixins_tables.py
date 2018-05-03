@@ -1,6 +1,5 @@
 from django.test import RequestFactory
 from snapshottest.django import TestCase
-from django.test.html import parse_html
 
 from django_tables2 import Table
 from cruds_mixins.mixins.tables import (
@@ -28,7 +27,7 @@ class TablesTest(TestCase):
         self.assertEqual(response.status_code, 200)
         response.render()
         # from .browser import display; display(response.content)
-        self.assertMatchSnapshot(parse_html(str(response.content)))
+        self.assertMatchSnapshot(test_helper.semantic_html(response.content))
 
     def test_custom_table(self):
         view = TableView.as_view(
@@ -40,7 +39,7 @@ class TablesTest(TestCase):
         self.assertEqual(response.status_code, 200)
         response.render()
         # from .browser import display; display(response.content)
-        self.assertMatchSnapshot(parse_html(str(response.content)))
+        self.assertMatchSnapshot(test_helper.semantic_html(response.content))
 
     def test_with_table_fields(self):
         view = TableView.as_view(
@@ -52,4 +51,3 @@ class TablesTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'name')
         self.assertNotContains(response, 'birthday')
-
