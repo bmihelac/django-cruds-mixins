@@ -21,8 +21,8 @@ class UserPassesTestMixin(UserPassesTestMixinBase):
     raise_exception = True
 
 
-class CRUDListView(CRUDMixin, UserPassesTestMixin,
-                   ActionsMixin, FilterMixin, TableView):
+class CRUDListView(FilterMixin, CRUDMixin, UserPassesTestMixin,
+                   ActionsMixin, TableView):
     default_template_name = 'cruds_mixins/list.html'
 
     def test_func(self):

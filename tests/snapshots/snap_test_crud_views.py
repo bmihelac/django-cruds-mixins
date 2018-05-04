@@ -97,8 +97,8 @@ Foo bar
 </td><td class="country">
 —
 </td><td class="active">
-<span class="false">
-✘
+<span class="true">
+✔
 </span>
 </td><td class="view_link">
 <a href="/author/1/">

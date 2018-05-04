@@ -37,7 +37,7 @@ class ExportMixinTest(TestCase):
         }))
         self.assertEqual(
             response.content,
-            b'id,name,birthday,country,active\r\n1,Foo bar,2000-01-01,,0\r\n'
+            b'id,name,birthday,country,active\r\n1,Foo bar,2000-01-01,,1\r\n'
         )
         self.assertEqual(
             response._headers['content-type'],

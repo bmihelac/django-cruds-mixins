@@ -1,6 +1,7 @@
 from django.db import models
 
 from cruds import utils as cruds_utils
+from .managers import AuthorQuerySet
 
 
 class Continent(models.Model):
@@ -45,7 +46,7 @@ class Author(models.Model):
     )
     active = models.BooleanField(
         'active',
-        default=False,
+        default=True,
     )
 
     def __str__(self):
@@ -53,3 +54,5 @@ class Author(models.Model):
 
     def get_absolute_url(self):
         return cruds_utils.crud_url(self, cruds_utils.ACTION_DETAIL)
+
+    objects = AuthorQuerySet.as_manager()

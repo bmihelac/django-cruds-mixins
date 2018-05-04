@@ -16,9 +16,11 @@ from ..mixins.navigation import (
 
 
 class CRUDMixin(object):
-    """
-    Define `for_user` manager method for model.
-    Define rules app_model_action
+    """Mixin that provides common functionalities for CRUD views.
+
+        ``base_template``
+        ``default_template_name``
+        ``permission_class``
     """
     base_template = None
     default_template_name = None
@@ -101,10 +103,7 @@ class CRUDMixin(object):
         return queryset
 
     def get_queryset(self):
-        queryset = self.get_base_queryset()
-        if hasattr(self, 'get_filtered_queryset'):
-            queryset = self.get_filtered_queryset(queryset)
-        return queryset
+        return self.get_base_queryset()
 
     # actions
     def get_action(self, title, url, **kwargs):

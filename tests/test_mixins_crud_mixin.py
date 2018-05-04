@@ -12,7 +12,7 @@ from cruds_mixins.permission_classes import (
     AllowNoone,
 )
 
-from .testapp.models import Author
+from .testapp.models import Author, Country
 from .test_helper import (
     create_author,
 )
@@ -96,8 +96,7 @@ class CRUDMixinTestCase(BaseTestCase):
             model = Author
             base_template = 'test_base.html'
 
-        view = MyView.as_view()
-        response = view(self.factory.get(''))
+        response = MyView.as_view()(self.request)
         self.assertIn('base_template', response.context_data)
 
     @mock.patch('cruds_mixins.mixins.cruds.messages')
@@ -112,3 +111,19 @@ class CRUDMixinTestCase(BaseTestCase):
         result = MyView.as_view()(self.request)
         self.assertTrue(mock_module.add_message.called)
         self.assertEqual(result.status_code, 302)
+
+    def test_queryset_for_user(self):
+
+        class MyView(CRUDMixin, ListView):
+            model = Author
+
+        author = create_author(active=False)
+        qs = MyView(request=self.request).get_queryset()
+        self.assertNotIn(author, qs, 'should use for_user manager method')
+
+    def test_queryset_default(self):
+
+        class MyView(CRUDMixin, ListView):
+            model = Country
+
+        MyView(request=self.request).get_queryset()
