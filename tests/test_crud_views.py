@@ -36,7 +36,7 @@ class TestCRUDListView(BaseTestCase):
 
 class CRUDUpdateViewTest(BaseTestCase):
 
-    @mock.patch('cruds_mixins.mixins.cruds.messages')
+    @mock.patch('cruds_mixins.mixins.messages')
     def test_without_message(self, mock_module):
         class MyView(CRUDUpdateView):
             model = Author

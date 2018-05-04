@@ -1,8 +1,4 @@
-from django.shortcuts import (
-    redirect,
-)
 from django.urls import NoReverseMatch
-from django.contrib import messages
 from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponseRedirect
@@ -10,12 +6,13 @@ from django.http import HttpResponseRedirect
 from cruds import utils as cruds_utils
 from ..conf import CrudsMixinsConf
 from ..utils.text import create_model_title
+from ..mixins.messages import MessagesMixin
 from ..mixins.navigation import (
     NavigationItem,
 )
 
 
-class CRUDMixin(object):
+class CRUDMixin(MessagesMixin):
     """Mixin that provides common functionalities for CRUD views.
 
         ``base_template``
@@ -180,16 +177,6 @@ class CRUDMixin(object):
         Hook allows updating instance before saving.
         """
 
-    # messages
-    def add_message_and_redirect(self, msg, url, msg_type=None, extra_tags=''):
-        if not msg_type:
-            msg_type = messages.INFO
-        messages.add_message(self.request, msg_type, msg, extra_tags)
-        return redirect(url)
-
-    def add_error_message_and_redirect(self, msg, url):
-        return self.add_message_and_redirect(msg, url, messages.ERROR, 'danger')
-
     # form handling
     def get_message(self):
         """Returns msg, msg_type tuple or None if no message should be added.
@@ -208,8 +195,12 @@ class CRUDMixin(object):
         form.save_m2m()
         message = self.get_message()
         if message:
-            messages.add_message(self.request, message[1], message[0])
-        return HttpResponseRedirect(self.get_success_url())
+            return self.add_message_and_redirect(
+                message[0],
+                self.get_success_url(),
+                message[1]
+            )
+        return self.get_success_url()
 
     # urls
     def get_next_url(self):

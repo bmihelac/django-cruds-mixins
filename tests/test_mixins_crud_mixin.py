@@ -99,7 +99,7 @@ class CRUDMixinTestCase(BaseTestCase):
         response = MyView.as_view()(self.request)
         self.assertIn('base_template', response.context_data)
 
-    @mock.patch('cruds_mixins.mixins.cruds.messages')
+    @mock.patch('cruds_mixins.mixins.messages.messages')
     def test_add_error_message_and_redirect(self, mock_module):
 
         class MyView(CRUDMixin, ListView):
