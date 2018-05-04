@@ -51,3 +51,15 @@ class BulkActionsMixinTest(TestCase):
             'action': 'non_existing',
         }))
         self.assertIsInstance(response, HttpResponseBadRequest)
+
+    def test_can_bulk_action(self):
+
+        class MyView2(MyView):
+            def can_bulk_action(self):
+                return False
+
+        view = MyView2.as_view()
+        response = view(self.factory.post('', data={
+            'action': 'test_bulk_action',
+        }))
+        self.assertEqual(response.status_code, 403)

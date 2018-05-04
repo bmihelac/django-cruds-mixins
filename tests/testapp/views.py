@@ -1,10 +1,7 @@
-from django import forms
 from cruds import utils as cruds_utils
 from cruds_mixins.views import crud
-from cruds_mixins.mixins.tables import BulkSelectionView
-from cruds_mixins.mixins.bulk_actions import (
-    BulkSelectionBaseForm
-)
+from cruds_mixins.mixins.messages import MessagesMixin
+from cruds_mixins.mixins.bulk_actions import BulkSelectionActionBaseView
 
 from .models import Author
 
@@ -30,16 +27,11 @@ class AuthorListView(crud.CRUDListView):
     bulk_activate_with_confirmation.short_description = 'Bulk activate with confirmation'
 
 
-class ConfirmationForm(BulkSelectionBaseForm):
-    pass
-
-
-class AuthorActivateView(BulkSelectionView):
-    form_class = ConfirmationForm
+class AuthorActivateView(MessagesMixin, BulkSelectionActionBaseView):
 
     def get_title(self):
         return 'Bulk activate with confirmation'
 
     def form_valid(self, form):
         self.add_message('activated')
-        return self.redirect()
+        return super().form_valid(form)

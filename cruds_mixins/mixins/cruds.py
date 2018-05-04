@@ -1,7 +1,6 @@
 from django.urls import NoReverseMatch
 from django.utils.module_loading import import_string
 from django.utils.translation import ugettext_lazy as _
-from django.http import HttpResponseRedirect
 
 from cruds import utils as cruds_utils
 from ..conf import CrudsMixinsConf

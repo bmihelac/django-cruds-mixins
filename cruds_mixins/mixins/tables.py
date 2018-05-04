@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.utils.translation import ugettext_lazy as _
-from django.http import HttpResponseRedirect
 from django.views.generic import (
     ListView,
-    TemplateView,
 )
-from django.contrib import messages
 
 from django_tables2 import RequestConfig
 from ..tables.tables import table_factory
@@ -72,52 +68,3 @@ class TableView(BulkActionsMixin, ListView):
         ctx['bulk_action_url'] = self.get_bulk_action_url()
         ctx['bulk_action_actions'] = self.get_bulk_action_actions()
         return ctx
-
-
-class BulkSelectionView(TemplateView):
-    """
-    View that display intermediate page with form and process selection on
-    form valid.
-    """
-    template_name = 'cruds_mixins/bulk_selection_form.html'
-    form_class = None
-
-    def add_message(self, msg):
-        """
-        Adds a message.
-        """
-        messages.add_message(self.request, messages.INFO, msg)
-
-    def get_form(self, action_name, selection, select_all):
-        """
-        Returns form.
-        """
-        kwargs = {
-        }
-        initial = {
-            'action': action_name,
-            'selection': selection,
-            'select_all': select_all,
-        }
-        if 'submit' in self.request.POST:
-            kwargs['data'] = self.request.POST
-        form = self.form_class(initial=initial, **kwargs)
-        form.fields['selection'].choices = [(s, s) for s in selection]
-        return form
-
-    def redirect(self):
-        """
-        Redirect to itself.
-        """
-        return HttpResponseRedirect(self.request.get_full_path())
-
-    def post(self, request, action_name, selection, select_all, queryset, *args, **kwargs):
-        form = self.get_form(action_name, selection, select_all)
-        self.queryset = queryset
-        if form.is_bound and form.is_valid():
-            return self.form_valid(form)
-        ctx = self.get_context_data(
-            form=form, selection=selection, queryset=queryset,
-            title=self.get_title(),
-        )
-        return self.render_to_response(ctx)
