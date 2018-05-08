@@ -2,21 +2,41 @@
 
 language: python
 
-matrix:
+jobs:
   include:
-    - python: 3.4
+    -
+      python: 3.4
       env: TOX_ENV=py34-django-20
-    - python: 3.5
+      install: pip install -r requirements_test.txt
+      script: tox -e $TOX_ENV
+    -
+      python: 3.5
       env: TOX_ENV=py35-django-20
-    - python: 3.6
+      install: pip install -r requirements_test.txt
+      script: tox -e $TOX_ENV
+    -
+      python: 3.6
       env: TOX_ENV=py36-django-20
-  fast_finish: true
-
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -r requirements_test.txt
-
-# command to run tests using coverage, e.g. python setup.py test
-script: tox -e $TOX_ENV
-
-after_success:
-  - codecov -e TOX_ENV
+      install: pip install -r requirements_test.txt
+      script: tox -e $TOX_ENV
+      after_success:
+        - codecov -e TOX_ENV
+    - stage: release
+      before_install:
+          - nvm install lts/*
+      install:
+          - pip install wheel twine
+          - npm install @semantic-release/changelog@2.0.2
+          - npm install @semantic-release/exec@2.2.4
+          - npm install @semantic-release/git@4.0.3
+          - npm install semantic-release@15.2.0
+      script: skip
+      deploy:
+          provider: script
+          skip_cleanup: true
+          script:
+              - npx semantic-release
+stages:
+  - test
+  - name: release
+    if: branch = master
