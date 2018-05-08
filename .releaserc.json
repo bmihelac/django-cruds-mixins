@@ -21,7 +21,7 @@
   "publish": [
     {
       "path": "@semantic-release/exec",
-      "cmd": "twine upload --repository-url https://test.pypi.org/legacy/ dist/*"
+      "cmd": "twine upload dist/*"
     },
     "@semantic-release/github"
   ],
