@@ -42,13 +42,12 @@ if sys.argv[-1] == 'tag':
     sys.exit()
 
 readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='django-cruds-mixins',
     version=version,
     description="""Your project description goes here""",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author='Bojan Mihelac',
     author_email='bmihelac@mihelac.org',
     url='https://github.com/bmihelac/django-cruds-mixins',
