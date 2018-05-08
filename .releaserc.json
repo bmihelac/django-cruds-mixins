@@ -1,0 +1,31 @@
+{
+  "verifyConditions": ["@semantic-release/github"],
+  "prepare": [
+    {
+      "path": "@semantic-release/exec",
+      "cmd": "echo \"__version__ = '${nextRelease.version}'\" > cruds_mixins/__init__.py"
+    },
+    {
+      "path": "@semantic-release/exec",
+      "cmd": "python setup.py sdist bdist_wheel"
+    },
+    {
+      "path": "@semantic-release/changelog"
+    },
+    {
+        "path": "@semantic-release/git",
+        "assets": ["cruds_mixins/__init__.py", "setup.py", "CHANGELOG.md"],
+        "successComment": "This ${issue.pull_request ? 'pull request' : 'issue'} is included in version ${nextRelease.version}"
+    }
+  ],
+  "publish": [
+    {
+      "path": "@semantic-release/exec",
+      "cmd": "twine upload dist/*"
+    },
+    "@semantic-release/github"
+  ],
+  "success": [
+    "@semantic-release/github"
+  ]
+}
