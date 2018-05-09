@@ -1,3 +1,11 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.0.0...v1.1.0) (2018-05-09)
+
+
+### Features
+
+* add translation catalog ([1536ae5](https://github.com/bmihelac/django-cruds-mixins/commit/1536ae5))
+
 <a name="1.0.0"></a>
 # 1.0.0 (2018-05-08)
 
