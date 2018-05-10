@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-10 04:19-0500\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+"X-Translated-Using: django-rosetta 0.7.4\n"
+
+#: mixins/cruds.py:137
+msgid "edit"
+msgstr "uredi"
+
+#: mixins/cruds.py:149
+msgid "delete"
+msgstr "izbriši"
+
+#: mixins/export.py:59
+msgid "Export"
+msgstr "izvozi"
+
+#: tables/columns.py:57
+msgid "Actions"
+msgstr "Ukrepi"
+
+#: tables/columns.py:59
+msgid "View"
+msgstr "Podrobnosti"
+
+#: templates/cruds_mixins/bulk_selection_form.html:11
+#: templates/cruds_mixins/form.html:19
+msgid "Submit"
+msgstr "Pošlji"
+
+#: templates/cruds_mixins/delete.html:10
+msgid "Are you sure?"
+msgstr "Ali ste prepričani?"
+
+#: templates/cruds_mixins/delete.html:16
+msgid "Delete"
+msgstr "Izbriši"
+
+#: templates/cruds_mixins/list.html:32
+#, python-format
+msgid "%(count)s results. Displaying: %(display)s."
+msgstr "%(count)s rezultatov. Prikazano: %(display)s."
+
+#: templates/cruds_mixins/partials/bulk_actions.html:7
+#, python-format
+msgid ""
+"\n"
+"      Select all %(num)s results\n"
+"      "
+msgstr ""
+"\n"
+"      Izberi vse %(num)s rezultate\n"
+"    "
+
+#: templates/cruds_mixins/partials/filter.html:9
+msgid "Filter"
+msgstr "Filter"
+
+#: templates/cruds_mixins/partials/pagination.html:12
+#: templates/cruds_mixins/partials/pagination.html:15
+msgid "Previous"
+msgstr "Prejšnji"
+
+#: templates/cruds_mixins/partials/pagination.html:25
+#: templates/cruds_mixins/partials/pagination.html:27
+msgid "Next"
+msgstr "Naslednji"
+
+#: utils/text.py:5
+#, python-format
+msgid "New %(model_name)s"
+msgstr "Ustvari %(model_name)s"
+
+#: utils/text.py:11
+#, python-format
+msgid "Edit %(model_name)s"
+msgstr "Uredi %(model_name)s"
+
+#: views/crud.py:59
+#, python-format
+msgid "Object %s has been created"
+msgstr "Zapis %s je bil ustvarjen"
+
+#: views/crud.py:69
+#, python-format
+msgid "Edit %(object)s"
+msgstr "Uredi %(object)s"
+
+#: views/crud.py:72
+#, python-format
+msgid "Object %s has been updated"
+msgstr "Zapis %s je bil spremenjen"
+
+#: views/crud.py:85
+#, python-format
+msgid "Delete %(model)s: %(object)s"
+msgstr "Zbriši %(model)s: %(object)s"
+
+#: views/crud.py:95
+msgid "Record has been deleted."
+msgstr "Zapis je bil zbrisan."
