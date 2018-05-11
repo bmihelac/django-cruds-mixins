@@ -1,3 +1,11 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.2.1...v1.3.0) (2018-05-11)
+
+
+### Features
+
+* configurable default table css class ([41220f6](https://github.com/bmihelac/django-cruds-mixins/commit/41220f6))
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/bmihelac/django-cruds-mixins/compare/v1.2.0...v1.2.1) (2018-05-10)
 
