@@ -11,43 +11,38 @@ from .testapp.tables import AuthorTable
 from . import test_helper
 
 
-class TablesTest(TestCase):
+def test_default(db, rf, snapshot):
+    view = TableView.as_view(
+        model=Author,
+        template_name='testapp/table.html'
+    )
+    response = view(rf.get(''))
+    assert response.status_code, 200
+    response.render()
+    snapshot.assert_match(test_helper.semantic_html(response.content))
 
-    def setUp(self):
-        self.factory = RequestFactory()
-        self.request = self.factory.get('')
-        self.author = test_helper.create_author()
 
-    def test_default(self):
-        view = TableView.as_view(
-            model=Author,
-            template_name='testapp/table.html'
-        )
-        response = view(self.request)
-        self.assertEqual(response.status_code, 200)
-        response.render()
-        # from .browser import display; display(response.content)
-        self.assertMatchSnapshot(test_helper.semantic_html(response.content))
+def test_custom_table(db, rf, snapshot):
+    view = TableView.as_view(
+        model=Author,
+        template_name='testapp/table.html',
+        table=AuthorTable
+    )
+    response = view(rf.get(''))
+    assert response.status_code, 200
+    response.render()
+    snapshot.assert_match(test_helper.semantic_html(response.content))
 
-    def test_custom_table(self):
-        view = TableView.as_view(
-            model=Author,
-            template_name='testapp/table.html',
-            table=AuthorTable
-        )
-        response = view(self.request)
-        self.assertEqual(response.status_code, 200)
-        response.render()
-        # from .browser import display; display(response.content)
-        self.assertMatchSnapshot(test_helper.semantic_html(response.content))
 
-    def test_with_table_fields(self):
-        view = TableView.as_view(
-            model=Author,
-            template_name='testapp/table.html',
-            table_fields=('name',)
-        )
-        response = view(self.request)
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'name')
-        self.assertNotContains(response, 'birthday')
+def test_with_table_fields(db, rf, snapshot):
+    view = TableView.as_view(
+        model=Author,
+        template_name='testapp/table.html',
+        table_fields=('name',)
+    )
+    response = view(rf.get(''))
+    assert response.status_code, 200
+    response.render()
+    content = response.content.decode()
+    assert 'name' in content
+    assert 'birthday' not in content

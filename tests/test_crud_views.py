@@ -1,9 +1,4 @@
-from unittest import mock
-
-from django.test.html import parse_html
-from django.test import RequestFactory
 from django.contrib.auth.models import AnonymousUser
-from snapshottest.django import TestCase
 
 from cruds_mixins.views.crud import (
     CRUDListView,
@@ -14,40 +9,34 @@ from .testapp.models import Author
 from . import test_helper
 
 
-class BaseTestCase(TestCase):
-
-    def setUp(self):
-        self.factory = RequestFactory()
-        self.author = test_helper.create_author()
-        self.anonymous_user = AnonymousUser()
-
-
-class TestCRUDListView(BaseTestCase):
-
-    def test_default(self):
-        view = CRUDListView.as_view(model=Author)
-        request = self.factory.get('')
-        request.user = AnonymousUser
-        response = view(request)
-        response.render()
-        # from .browser import display; display(response.content)
-        self.assertMatchSnapshot(test_helper.semantic_html(response.content))
+def test_list(db, rf, snapshot):
+    view = CRUDListView.as_view(model=Author)
+    request = rf.get('')
+    request.user = AnonymousUser
+    response = view(request)
+    response.render()
+    snapshot.assert_match(test_helper.semantic_html(response.content))
 
 
-class CRUDUpdateViewTest(BaseTestCase):
+class MyView(CRUDUpdateView):
+    model = Author
+    fields = ('name', )
 
-    @mock.patch('cruds_mixins.mixins.cruds.messages')
-    def test_without_message(self, mock_module):
-        class MyView(CRUDUpdateView):
-            model = Author
-            fields = ('name', )
+    def get_message(self):
+        return None
 
-            def get_message(self):
-                return None
 
-        self.request = self.factory.post('', {
-            'name': 'aaa'
-        })
-        self.request.user = self.anonymous_user
-        MyView.as_view()(self.request, pk=self.author.pk)
-        self.assertFalse(mock_module.add_message.called)
+def test_update(db, rf, snapshot, monkeypatch):
+    request = rf.post('', {'name': 'aaa'})
+    request.user = AnonymousUser
+    author = test_helper.create_author()
+    MyView.as_view()(request, pk=author.pk)
+
+    add_message_called = False
+
+    def add_message(*args, **kwargs):
+        nonlocal add_message_called
+        add_message_called = True
+
+    monkeypatch.setattr('cruds_mixins.mixins.cruds.messages.add_message', add_message)
+    assert add_message_called is False
