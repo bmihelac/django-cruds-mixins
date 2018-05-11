@@ -1,3 +1,11 @@
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.3.0...v1.4.0) (2018-05-11)
+
+
+### Features
+
+* use BEM css classes in templates ([1e415d4](https://github.com/bmihelac/django-cruds-mixins/commit/1e415d4))
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.2.1...v1.3.0) (2018-05-11)
 
