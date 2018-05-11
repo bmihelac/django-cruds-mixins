@@ -7,8 +7,8 @@ from snapshottest import Snapshot
 
 snapshots = Snapshot()
 
-snapshots['TablesTest::test_default 1'] = '''<div class="table-container">
-<table class="table table--toggle-columns table-bordered table-hover table-striped">
+snapshots['test_default 1'] = '''<div class="table-container">
+<table class="table table--toggle-columns table-hover">
 <thead>
 <tr>
 <th class="selection">
@@ -33,31 +33,11 @@ Active
 Actions
 </th>
 </tr>
-</thead><tbody>
-<tr class="even">
-<td class="selection">
-<input name="selection" type="checkbox" value="1" />
-</td><td class="name">
-Foo bar
-</td><td class="birthday">
-01/01/2000
-</td><td class="country">
-—
-</td><td class="active">
-<span class="true">
-✔
-</span>
-</td><td class="view_link">
-<a href="/author/1/">
-View
-</a>
-</td>
-</tr>
-</tbody>
-</table><ul class="pagination" />
+</thead><tbody />
+</table>
 </div>'''
 
-snapshots['TablesTest::test_custom_table 1'] = '''<div class="table-container">
+snapshots['test_custom_table 1'] = '''<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -83,22 +63,6 @@ Active
 </a>
 </th>
 </tr>
-</thead><tbody>
-<tr class="even">
-<td class="id">
-1
-</td><td class="name">
-Foo bar
-</td><td class="birthday">
-01/01/2000
-</td><td class="country">
-—
-</td><td class="active">
-<span class="true">
-✔
-</span>
-</td>
-</tr>
-</tbody>
-</table><ul class="pagination" />
+</thead><tbody />
+</table>
 </div>'''

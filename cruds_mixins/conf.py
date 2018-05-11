@@ -9,3 +9,4 @@ class CrudsMixinsConf(AppConf):
     CSS_CLASS_BUTTON = 'btn btn-secondary'
     CSS_CLASS_BUTTON_PRIMARY = 'btn btn-primary'
     CSS_CLASS_BUTTON_DANGER = 'btn btn-danger'
+    CSS_CLASS_TABLE = 'table table-hover table--toggle-columns'

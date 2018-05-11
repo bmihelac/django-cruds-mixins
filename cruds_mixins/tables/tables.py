@@ -1,5 +1,6 @@
 import django_tables2 as tables
 
+from ..conf import CrudsMixinsConf
 from .columns import (
     ViewLinkColumn,
     SelectionColumn,
@@ -7,16 +8,15 @@ from .columns import (
 
 
 class StyledTable(tables.Table):
-    """
-    Bootstrap style.
+    """Base table class.
 
-    Abilities:
+    Table is assigned classes from `CRUDS_MIXINS_CSS_CLASS_TABLE`.
 
     `Meta.non_orderable_fields` disable sorting for specified fields
     """
 
     class Meta:
-        attrs = {"class": "table table-bordered table-striped table-hover table--toggle-columns"}
+        attrs = {"class": CrudsMixinsConf.CSS_CLASS_TABLE}
         non_orderable_fields = []
 
     def __init__(self, *args, **kwargs):

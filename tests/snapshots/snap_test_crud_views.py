@@ -7,7 +7,7 @@ from snapshottest import Snapshot
 
 snapshots = Snapshot()
 
-snapshots['TestCRUDListView::test_default 1'] = '''<html>
+snapshots['test_list 1'] = '''<html>
 <head>
 <meta charset="utf-8" /><meta content="width=device-width" name="viewport" /><title />
 </head><body>
@@ -61,7 +61,7 @@ Filter
 </button>
 </div>
 </fieldset><div class="table-container">
-<table class="table table--toggle-columns table-bordered table-hover table-striped">
+<table class="table table--toggle-columns table-hover">
 <thead>
 <tr>
 <th class="selection">
@@ -86,28 +86,8 @@ Active
 Actions
 </th>
 </tr>
-</thead><tbody>
-<tr class="even">
-<td class="selection">
-<input name="selection" type="checkbox" value="1" />
-</td><td class="name">
-Foo bar
-</td><td class="birthday">
-01/01/2000
-</td><td class="country">
-—
-</td><td class="active">
-<span class="true">
-✔
-</span>
-</td><td class="view_link">
-<a href="/author/1/">
-View
-</a>
-</td>
-</tr>
-</tbody>
-</table><ul class="pagination" />
+</thead><tbody />
+</table>
 </div>
 </form>
 </body>
