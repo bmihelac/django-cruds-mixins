@@ -1,3 +1,11 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/bmihelac/django-cruds-mixins/compare/v1.2.0...v1.2.1) (2018-05-10)
+
+
+### Bug Fixes
+
+* include translations in distribution ([8626c4e](https://github.com/bmihelac/django-cruds-mixins/commit/8626c4e))
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.1.0...v1.2.0) (2018-05-10)
 
