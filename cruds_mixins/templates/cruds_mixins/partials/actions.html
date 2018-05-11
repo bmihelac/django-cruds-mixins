@@ -1,17 +1,17 @@
 {% if actions %}
-  <div class="actions">
+  <div class="cruds-actions hidden-print">
     {% for action in actions %}
       {% if action.html %}
         {{ action.html|safe }}
       {% else %}
         {% if action %}
           {% if action.post %}
-            <form class="action-form" action="{{ action.url }}" method="POST">
+            <form class="cruds-actions__action-form" action="{{ action.url }}" method="POST">
               {% csrf_token %}
                 <button type="submit" name="{{ action.action }}" value="{{ action.value }}" class="{{ action.css_class }}">{{ action.title }}</button>
             </form>
           {% else %}
-            <a href="{{ action.url }}" class="{{ action.css_class }} hidden-print">{{ action.title }}</a>
+            <a href="{{ action.url }}" class="cruds-actions__btn {{ action.css_class }}">{{ action.title }}</a>
           {% endif %}
         {% endif %}
       {% endif %}

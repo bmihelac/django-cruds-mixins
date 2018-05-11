@@ -2,11 +2,21 @@
 
 {% block main %}
 
-<h1 class="page-header">{{ title }}</h1>
+<div class="cruds-detail">
 
-{% include "cruds_mixins/partials/actions.html" %}
+  <div class="cruds-detail__header">
+    <h1>{{ title }}</h1>
+  </div>
 
-{% block detail_content %}
-{% endblock %}
+  <div class="cruds-detail__actions">
+    {% include "cruds_mixins/partials/actions.html" %}
+  </div>
+
+  <div class="cruds-detail__content">
+    {% block detail_content %}
+    {% endblock %}
+  </div>
+
+</div>
 
 {% endblock %}

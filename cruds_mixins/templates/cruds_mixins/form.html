@@ -4,24 +4,33 @@
 
 {% block main %}
 
-  <h1 class="page-header">{{ title }}</h1>
+<div class="cruds-form">
+
+  <div class="cruds-form__header">
+    <h1>{{ title }}</h1>
+  </div>
 
   {% block before_form %}
   {% endblock %}
 
-  {% if form.helper %}
-    {% crispy form %}
-  {% else %}
-    <form method="POST" enctype="multipart/form-data" class="default-form">
-      {% csrf_token %}
-      {{ form|crispy }}
+  <div class="cruds-form__form">
+    {% if form.helper %}
+      {% crispy form %}
+    {% else %}
+      <form method="POST" enctype="multipart/form-data" class="default-form">
+        {% csrf_token %}
+        {{ form|crispy }}
 
-      <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
-    </form>
-  {% endif %}
+        <button type="submit" class="btn btn-default">{% trans "Submit" %}</button>
+      </form>
+    {% endif %}
+  </div>
 
   {% block after_form %}
   {% endblock %}
 
+  <div class="cruds-form__actions">
   {% include "cruds_mixins/partials/actions.html" %}
+  </div>
+</div>
 {% endblock %}

@@ -11,13 +11,20 @@ snapshots['test_list 1'] = '''<html>
 <head>
 <meta charset="utf-8" /><meta content="width=device-width" name="viewport" /><title />
 </head><body>
-<h1 class="page-header">
+<div class="cruds-list">
+<div class="cruds-list__header">
+<h1>
 Authors
-</h1><div class="actions">
-<a class="btn btn-primary hidden-print" href="/author/new/">
+</h1>
+</div><div class="cruds-list__actions">
+<div class="cruds-actions hidden-print">
+<a class="btn btn-primary cruds-actions__btn" href="/author/new/">
 New Author
 </a>
-</div><form action class="inline-form" method="get">
+</div>
+</div><div class="cruds-list__filters">
+<div class="cruds-filter">
+<form action class="inline-form" method="get">
 <fieldset>
 <div class="control-group" id="div_id_name">
 <label class=" control-label" for="id_name">
@@ -60,7 +67,11 @@ No
 Filter
 </button>
 </div>
-</fieldset><div class="table-container">
+</fieldset>
+</form>
+</div>
+</div><div class="cruds-list__table">
+<div class="table-container">
 <table class="table table--toggle-columns table-hover">
 <thead>
 <tr>
@@ -88,7 +99,8 @@ Actions
 </tr>
 </thead><tbody />
 </table>
+</div><div class="cruds-list__pagination" />
 </div>
-</form>
+</div>
 </body>
 </html>'''

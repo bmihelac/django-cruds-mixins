@@ -4,16 +4,23 @@
 
 {% block main %}
 
-  <h1 class="page-header">{{ title }}</h1>
+<div class="cruds-delete">
 
-  <p>
+  <div class="cruds-delete__header">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <div class="cruds-delete__confirmation-message">
     {% trans "Are you sure?" %}
-  </p>
+  </div>
 
-  <form method="POST">
-    {% csrf_token %}
+  <div class="cruds-delete__confirmation-form">
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
+    </form>
+  </div>
 
-    <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
-  </form>
+</div>
 
 {% endblock %}
