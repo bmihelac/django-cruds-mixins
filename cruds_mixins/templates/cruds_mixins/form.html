@@ -4,16 +4,16 @@
 
 {% block main %}
 
-<div class="cruds-form">
+<div class="cruds-form cruds-page">
 
-  <div class="cruds-form__header">
+  <div class="cruds-form__header cruds-page__header">
     <h1>{{ title }}</h1>
   </div>
 
   {% block before_form %}
   {% endblock %}
 
-  <div class="cruds-form__form">
+  <div class="cruds-form__form cruds-page__content">
     {% if form.helper %}
       {% crispy form %}
     {% else %}
@@ -29,7 +29,7 @@
   {% block after_form %}
   {% endblock %}
 
-  <div class="cruds-form__actions">
+  <div class="cruds-form__actions cruds-page__actions">
   {% include "cruds_mixins/partials/actions.html" %}
   </div>
 </div>
