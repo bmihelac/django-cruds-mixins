@@ -2,13 +2,20 @@
 {% load crispy_forms_tags %}
 
 {% if filter.form %}
-<div class="cruds-filter">
-<form action="" method="get" class="inline-form">
-  <fieldset>
-    {{ filter.form|crispy }}
-    <div class="control-group">
-      <button type="submit" class="btn btn-primary">{% trans "Filter" %}</button>
-    </div>
-  </fieldset>
+<div class="cruds-filter card">
+  <div class="card-body">
+    <h5 class="card-title">{% trans "search" %}</h5>
+    <form action="" method="get" class="inline-form">
+      {% if filter.form.helper %}
+          {% crispy filter.form %}
+      {% else %}
+        <form action="" method="GET">
+          {{ filter.form|crispy }}
+          <button type="submit" class="btn btn-info">{% trans "submit" %}</button>
+        </form>
+      {% endif %}
+      <fieldset>
+    </form>
+  </div>
 </div>
 {% endif %}
