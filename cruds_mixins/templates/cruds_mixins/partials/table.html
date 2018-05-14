@@ -1,0 +1,5 @@
+{% extends "django_tables2/table.html" %}
+
+{% block pagination %}
+  {% include "cruds_mixins/partials/pagination.html" with page_obj=table.page %}
+{% endblock pagination  %}
