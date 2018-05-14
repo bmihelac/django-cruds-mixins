@@ -27,7 +27,7 @@
       <input type="hidden" name="next" value="{{ request.get_full_path }}">
     {% endif %}
 
-    {% render_table table %}
+    {% render_table table "cruds_mixins/partials/table.html" %}
 
     {% if bulk_action_actions %}
       <div class="cruds-list__bulk-actions">
