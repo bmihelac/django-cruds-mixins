@@ -1,3 +1,11 @@
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.5.0...v1.6.0) (2018-05-14)
+
+
+### Features
+
+* improve pagination ([2232eca](https://github.com/bmihelac/django-cruds-mixins/commit/2232eca))
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.4.0...v1.5.0) (2018-05-14)
 
