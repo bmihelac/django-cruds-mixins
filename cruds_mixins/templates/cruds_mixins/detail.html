@@ -2,17 +2,17 @@
 
 {% block main %}
 
-<div class="cruds-detail">
+<div class="cruds-detail cruds-page">
 
-  <div class="cruds-detail__header">
+  <div class="cruds-detail__header cruds-page__header">
     <h1>{{ title }}</h1>
   </div>
 
-  <div class="cruds-detail__actions">
+  <div class="cruds-detail__actions cruds-page__actions">
     {% include "cruds_mixins/partials/actions.html" %}
   </div>
 
-  <div class="cruds-detail__content">
+  <div class="cruds-detail__content cruds-page__content">
     {% block detail_content %}
     {% endblock %}
   </div>

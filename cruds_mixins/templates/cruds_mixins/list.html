@@ -4,23 +4,23 @@
 
 {% block main %}
 
-<div class="cruds-list">
+<div class="cruds-list cruds-page">
 
-  <div class="cruds-list__header">
+  <div class="cruds-list__header cruds-page__header">
     <h1>{{ title }}</h1>
   </div>
 
   {% block list_actions %}
-    <div class="cruds-list__actions">
+    <div class="cruds-list__actions cruds-page__actions">
       {% include "cruds_mixins/partials/actions.html" %}
     </div>
   {% endblock %}
 
-  <div class="cruds-list__filters">
+  <div class="cruds-list__filters cruds-page__filters">
     {% include "cruds_mixins/partials/filter.html" %}
   </div>
 
-  <div class="cruds-list__table">
+  <div class="cruds-list__table cruds-page__content">
     {% if bulk_action_actions %}
       <form action="{{ bulk_action_url|default:"" }}" method="POST" data-select-table>
       {% csrf_token %}
@@ -36,7 +36,7 @@
       </form>
     {% endif %}
 
-    <div class="cruds-list__pagination">
+    <div class="cruds-list__pagination cruds-page__pagination">
       {% if paginator %}
           {% blocktrans with count=paginator.count display=object_list.count %}{{count}} results. Displaying: {{display}}.{% endblocktrans %}
       {% endif %}
