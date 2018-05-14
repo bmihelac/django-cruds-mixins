@@ -1,3 +1,17 @@
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.4.0...v1.5.0) (2018-05-14)
+
+
+### Bug Fixes
+
+* filter.html template ([400ae8c](https://github.com/bmihelac/django-cruds-mixins/commit/400ae8c))
+
+
+### Features
+
+* add base CSS classes ([89875ed](https://github.com/bmihelac/django-cruds-mixins/commit/89875ed))
+* optimize filter template ([a29e925](https://github.com/bmihelac/django-cruds-mixins/commit/a29e925))
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.3.0...v1.4.0) (2018-05-11)
 
