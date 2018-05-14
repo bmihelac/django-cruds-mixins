@@ -5,17 +5,16 @@
 <div class="cruds-filter card">
   <div class="card-body">
     <h5 class="card-title">{% trans "search" %}</h5>
-    <form action="" method="get" class="inline-form">
       {% if filter.form.helper %}
           {% crispy filter.form %}
       {% else %}
         <form action="" method="GET">
-          {{ filter.form|crispy }}
+          <fieldset>
+            {{ filter.form|crispy }}
+          </fieldset>
           <button type="submit" class="btn btn-info">{% trans "submit" %}</button>
         </form>
       {% endif %}
-      <fieldset>
-    </form>
   </div>
 </div>
 {% endif %}
