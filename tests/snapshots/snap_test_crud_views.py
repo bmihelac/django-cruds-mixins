@@ -11,20 +11,23 @@ snapshots['test_list 1'] = '''<html>
 <head>
 <meta charset="utf-8" /><meta content="width=device-width" name="viewport" /><title />
 </head><body>
-<div class="cruds-list">
-<div class="cruds-list__header">
+<div class="cruds-list cruds-page">
+<div class="cruds-list__header cruds-page__header">
 <h1>
 Authors
 </h1>
-</div><div class="cruds-list__actions">
+</div><div class="cruds-list__actions cruds-page__actions">
 <div class="cruds-actions hidden-print">
 <a class="btn btn-primary cruds-actions__btn" href="/author/new/">
 New Author
 </a>
 </div>
-</div><div class="cruds-list__filters">
-<div class="cruds-filter">
-<form action class="inline-form" method="get">
+</div><div class="cruds-list__filters cruds-page__filters">
+<div class="card cruds-filter">
+<div class="card-body">
+<h5 class="card-title">
+search
+</h5><form action method="GET">
 <fieldset>
 <div class="control-group" id="div_id_name">
 <label class=" control-label" for="id_name">
@@ -62,15 +65,14 @@ No
 </option>
 </select>
 </div>
-</div><div class="control-group">
-<button class="btn btn-primary" type="submit">
-Filter
-</button>
 </div>
-</fieldset>
+</fieldset><button class="btn btn-info" type="submit">
+submit
+</button>
 </form>
 </div>
-</div><div class="cruds-list__table">
+</div>
+</div><div class="cruds-list__table cruds-page__content">
 <div class="table-container">
 <table class="table table--toggle-columns table-hover">
 <thead>
@@ -99,7 +101,7 @@ Actions
 </tr>
 </thead><tbody />
 </table>
-</div><div class="cruds-list__pagination" />
+</div><div class="cruds-list__pagination cruds-page__pagination" />
 </div>
 </div>
 </body>
