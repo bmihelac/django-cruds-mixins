@@ -26,7 +26,7 @@ New Author
 <div class="card cruds-filter">
 <div class="card-body">
 <h5 class="card-title">
-search
+Filter
 </h5><form action method="GET">
 <fieldset>
 <div class="control-group" id="div_id_name">
