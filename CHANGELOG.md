@@ -1,3 +1,12 @@
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/bmihelac/django-cruds-mixins/compare/v1.6.0...v1.6.1) (2018-05-15)
+
+
+### Bug Fixes
+
+* filter.html translation ([09bd4ca](https://github.com/bmihelac/django-cruds-mixins/commit/09bd4ca))
+* update snapshot for 09bd4ca ([3b98301](https://github.com/bmihelac/django-cruds-mixins/commit/3b98301))
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.5.0...v1.6.0) (2018-05-14)
 
