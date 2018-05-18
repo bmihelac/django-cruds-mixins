@@ -95,8 +95,7 @@ class RulesPermissions(PermissionClass):
         return user.has_perm(
             cruds_utils.crud_permission_name(
                 model,
-                cruds_utils.ACTION_CREATE,
-                instance
+                cruds_utils.ACTION_UPDATE,
             ),
             instance,
         )
@@ -106,7 +105,6 @@ class RulesPermissions(PermissionClass):
             cruds_utils.crud_permission_name(
                 model,
                 cruds_utils.ACTION_DETAIL,
-                instance
             ),
             instance,
         )
@@ -116,7 +114,6 @@ class RulesPermissions(PermissionClass):
             cruds_utils.crud_permission_name(
                 model,
                 cruds_utils.ACTION_DELETE,
-                instance
             ),
             instance,
         )
