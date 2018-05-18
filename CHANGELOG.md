@@ -1,3 +1,11 @@
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/bmihelac/django-cruds-mixins/compare/v1.6.1...v1.6.2) (2018-05-18)
+
+
+### Bug Fixes
+
+* permission names in RulesPermissions ([a1d0bf4](https://github.com/bmihelac/django-cruds-mixins/commit/a1d0bf4))
+
 <a name="1.6.1"></a>
 ## [1.6.1](https://github.com/bmihelac/django-cruds-mixins/compare/v1.6.0...v1.6.1) (2018-05-15)
 
