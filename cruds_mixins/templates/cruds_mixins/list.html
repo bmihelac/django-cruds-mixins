@@ -37,11 +37,7 @@
     {% endif %}
 
     <div class="cruds-list__pagination cruds-page__pagination">
-      {% if paginator %}
-          {% blocktrans with count=paginator.count display=object_list.count %}{{count}} results. Displaying: {{display}}.{% endblocktrans %}
-      {% endif %}
-
-      {% include "cruds_mixins/partials/pagination.html" %}
+      {% include "cruds_mixins/partials/pagination.html" with page_obj=table.page %}
     </div>
 
   </div>
