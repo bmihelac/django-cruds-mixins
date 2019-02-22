@@ -1,3 +1,11 @@
+## [1.6.4](https://github.com/bmihelac/django-cruds-mixins/compare/v1.6.3...v1.6.4) (2019-02-22)
+
+
+### Bug Fixes
+
+* django-tables2 version ([dadcf27](https://github.com/bmihelac/django-cruds-mixins/commit/dadcf27))
+* freeze django-tables until requirement ([dd78a31](https://github.com/bmihelac/django-cruds-mixins/commit/dd78a31))
+
 ## [1.6.3](https://github.com/bmihelac/django-cruds-mixins/compare/v1.6.2...v1.6.3) (2019-02-22)
 
 
