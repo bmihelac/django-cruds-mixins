@@ -1,3 +1,11 @@
+## [1.6.3](https://github.com/bmihelac/django-cruds-mixins/compare/v1.6.2...v1.6.3) (2019-02-22)
+
+
+### Bug Fixes
+
+* do not test with Django 2.1 yet ([4f44752](https://github.com/bmihelac/django-cruds-mixins/commit/4f44752))
+* move pagination from django-table partial ([2aaefdd](https://github.com/bmihelac/django-cruds-mixins/commit/2aaefdd))
+
 <a name="1.6.2"></a>
 ## [1.6.2](https://github.com/bmihelac/django-cruds-mixins/compare/v1.6.1...v1.6.2) (2018-05-18)
 
