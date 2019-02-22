@@ -41,7 +41,7 @@ setup(
         'Django>=2.0.0',
         'django-cruds>=1.0',
         'rules==1.3.0',
-        'django-tables2==1.20.1',
+        'django-tables2==1.21.1',
         'django-appconf==1.0.2',
         'django-filter==1.1.0',
         'django-crispy-forms==1.7.2',
