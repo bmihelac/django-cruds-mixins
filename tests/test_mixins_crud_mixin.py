@@ -73,7 +73,7 @@ class CRUDMixinTestCase(BaseTestCase):
         result = MyView.as_view()(self.request, pk=self.author.pk)
         self.assertEqual(result, [None] * 3)
 
-    @override_settings(ROOT_URLCONF=[])
+    @override_settings(ROOT_URLCONF="tests.urls_empty")
     def test_get_actions_no_reverse_match(self):
 
         class MyView(CRUDMixin, DetailView):

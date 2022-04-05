@@ -9,7 +9,7 @@ snapshots = Snapshot()
 
 snapshots['test_list 1'] = '''<html>
 <head>
-<meta charset="utf-8" /><meta content="width=device-width" name="viewport" /><title />
+<meta charset="utf-8"><meta content="width=device-width" name="viewport"><title>
 </head><body>
 <div class="cruds-list cruds-page">
 <div class="cruds-list__header cruds-page__header">
@@ -30,19 +30,19 @@ Filter
 </h5><form action method="GET">
 <fieldset>
 <div class="control-group" id="div_id_name">
-<label class=" control-label" for="id_name">
+<label class="control-label" for="id_name">
 Name contains
 </label><div class="controls">
-<input class="textInput textinput" id="id_name" name="name" type="text" />
+<input class="textInput textinput" id="id_name" name="name" type="text">
 </div>
 </div><div class="control-group" id="div_id_birthday">
-<label class=" control-label" for="id_birthday">
+<label class="control-label" for="id_birthday">
 Birthday
 </label><div class="controls">
-<input class="dateinput" id="id_birthday" name="birthday" type="text" />
+<input class="dateinput" id="id_birthday" name="birthday" type="text">
 </div>
 </div><div class="control-group" id="div_id_country">
-<label class=" control-label" for="id_country">
+<label class="control-label" for="id_country">
 Country
 </label><div class="controls">
 <select class="select" id="id_country" name="country">
@@ -52,15 +52,15 @@ Country
 </select>
 </div>
 </div><div class="control-group" id="div_id_active">
-<label class=" control-label" for="id_active">
+<label class="control-label" for="id_active">
 Active
 </label><div class="controls">
 <select class="nullbooleanselect" id="id_active" name="active">
-<option selected value="1">
+<option selected value="unknown">
 Unknown
-</option><option value="2">
+</option><option value="true">
 Yes
-</option><option value="3">
+</option><option value="false">
 No
 </option>
 </select>
@@ -77,31 +77,31 @@ submit
 <table class="table table--toggle-columns table-hover">
 <thead>
 <tr>
-<th class="selection">
-<input data-select-all type="checkbox" />
-</th><th class="name orderable">
+<th>
+<input data-select-all type="checkbox">
+</th><th class="orderable">
 <a href="?sort=name">
 Name
 </a>
-</th><th class="birthday orderable">
+</th><th class="orderable">
 <a href="?sort=birthday">
 Birthday
 </a>
-</th><th class="country orderable">
+</th><th class="orderable">
 <a href="?sort=country">
 Country
 </a>
-</th><th class="active orderable">
+</th><th class="orderable">
 <a href="?sort=active">
 Active
 </a>
-</th><th class="view_link">
+</th><th>
 Actions
 </th>
 </tr>
-</thead><tbody />
+</thead><tbody>
 </table>
-</div><div class="cruds-list__pagination cruds-page__pagination" />
+</div><div class="cruds-list__pagination cruds-page__pagination">
 </div>
 </div>
 </body>
