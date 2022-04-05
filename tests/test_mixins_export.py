@@ -40,8 +40,8 @@ class ExportMixinTest(TestCase):
             b'id,name,birthday,country,active\r\n1,Foo bar,2000-01-01,,1\r\n'
         )
         self.assertEqual(
-            response._headers['content-type'],
-            ('Content-Type', 'text/csv')
+            response.headers['content-type'],
+            'text/csv'
         )
 
     def test_bulk_export_with_resource_class(self):
