@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.6.4...v2.0.0) (2022-05-10)
+
+
+### Features
+
+* Django 3.2 compatibility ([ba9a151](https://github.com/bmihelac/django-cruds-mixins/commit/ba9a15180c3c0ddaea7bdcbe80f9f8fdcc30a4eb))
+
+
+### BREAKING CHANGES
+
+* remove Django < 3.2 compatibility, remove python3.6
+
 ## [1.6.4](https://github.com/bmihelac/django-cruds-mixins/compare/v1.6.3...v1.6.4) (2019-02-22)
 
 
