@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/bmihelac/django-cruds-mixins/compare/v2.0.0...v2.0.1) (2022-05-10)
+
+
+### Bug Fixes
+
+* add missing dependency django-import-export ([f5ca9b3](https://github.com/bmihelac/django-cruds-mixins/commit/f5ca9b3dc55eb40bc1496076fa0bb4df8c3b66ed))
+
 # [2.0.0](https://github.com/bmihelac/django-cruds-mixins/compare/v1.6.4...v2.0.0) (2022-05-10)
 
 
