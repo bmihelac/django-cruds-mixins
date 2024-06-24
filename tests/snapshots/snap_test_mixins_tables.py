@@ -12,7 +12,7 @@ snapshots['test_default 1'] = '''<div class="table-container">
 <thead>
 <tr>
 <th>
-<input data-select-all type="checkbox">
+<input data-select-all="" type="checkbox">
 </th><th class="orderable">
 <a href="?sort=name">
 Name

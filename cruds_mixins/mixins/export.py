@@ -1,10 +1,9 @@
 from datetime import datetime
-
-from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponse
 
 from import_export import resources
 from import_export.formats.base_formats import CSV
+from django.utils.translation import gettext_lazy as _
 
 
 class ExportMixin(object):

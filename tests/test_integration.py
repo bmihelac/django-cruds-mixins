@@ -1,15 +1,13 @@
 from django_webtest import WebTest
 
-from django.utils.translation import ugettext as _
-
 from cruds import utils as cruds_utils
 from cruds_mixins.utils.text import (
     create_model_title,
-    edit_model_title,
 )
 
 from .testapp.models import Author
 from . import test_helper
+from django.utils.translation import gettext as _
 
 
 class IntegrationTest(WebTest):

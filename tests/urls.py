@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import
 
-from django.conf.urls import url, include
+from django.conf.urls import include
 
 from .testapp import urls as testapp_urls
+from django.urls import path
 
 
 urlpatterns = [
-    url(r'^', include(testapp_urls)),
+    path('', include(testapp_urls)),
 ]

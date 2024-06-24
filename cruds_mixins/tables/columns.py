@@ -1,5 +1,4 @@
 from django.utils.encoding import force_str
-from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.urls import (
     NoReverseMatch,
@@ -18,6 +17,7 @@ from django_tables2.utils import AttributeDict
 from cruds.utils import (
     crud_url,
 )
+from django.utils.translation import gettext_lazy as _
 
 
 @library.register

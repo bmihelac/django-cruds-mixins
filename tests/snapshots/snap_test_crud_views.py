@@ -27,7 +27,7 @@ New Author
 <div class="card-body">
 <h5 class="card-title">
 Filter
-</h5><form action method="GET">
+</h5><form action="" method="GET">
 <fieldset>
 <div class="control-group" id="div_id_name">
 <label class="control-label" for="id_name">
@@ -46,7 +46,7 @@ Birthday
 Country
 </label><div class="controls">
 <select class="select" id="id_country" name="country">
-<option selected value>
+<option selected value="">
 ---------
 </option>
 </select>
@@ -78,7 +78,7 @@ submit
 <thead>
 <tr>
 <th>
-<input data-select-all type="checkbox">
+<input data-select-all="" type="checkbox">
 </th><th class="orderable">
 <a href="?sort=name">
 Name

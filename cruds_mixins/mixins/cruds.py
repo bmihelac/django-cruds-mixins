@@ -4,7 +4,6 @@ from django.shortcuts import (
 from django.urls import NoReverseMatch
 from django.contrib import messages
 from django.utils.module_loading import import_string
-from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponseRedirect
 
 from cruds import utils as cruds_utils
@@ -13,6 +12,7 @@ from ..utils.text import create_model_title
 from ..mixins.navigation import (
     NavigationItem,
 )
+from django.utils.translation import gettext_lazy as _
 
 
 class CRUDMixin(object):

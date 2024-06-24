@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -15,6 +14,7 @@ from ..mixins.navigation import (
 from ..mixins.tables import TableView
 from ..mixins.filter_mixin import FilterMixin
 from ..mixins.cruds import CRUDMixin
+from django.utils.translation import gettext_lazy as _
 
 
 class UserPassesTestMixin(UserPassesTestMixinBase):
@@ -90,8 +90,8 @@ class CRUDDeleteView(CRUDMixin, UserPassesTestMixin, DeleteView):
     def get_success_url(self):
         return self.get_list_url()
 
-    def delete(self, request, *args, **kwargs):
-        resp = super(CRUDDeleteView, self).delete(request, *args, **kwargs)
-        msg = _('Record has been deleted.')
-        messages.add_message(request, messages.INFO, msg)
+    def form_valid(self, form):
+        resp = super().delete(form)
+        msg = _("Record has been deleted.")
+        messages.add_message(self.request, messages.SUCCESS, msg)
         return resp

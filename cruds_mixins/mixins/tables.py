@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponseRedirect
 from django.views.generic import (
     ListView,
@@ -12,6 +10,7 @@ from django.contrib import messages
 from django_tables2 import RequestConfig
 from ..tables.tables import table_factory
 from .bulk_actions import BulkActionsMixin
+from django.utils.translation import gettext_lazy as _
 
 
 DEFAULT_SKIP_FIELDS = ['id', 'created', 'modified', 'created_by', 'updated_by']
