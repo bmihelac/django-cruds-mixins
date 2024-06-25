@@ -1,3 +1,14 @@
+## 3.0.0 (2024-06-25)
+
+* chore: remove obsolete requirements ([0143e79](https://github.com/bmihelac/django-cruds-mixins/commit/0143e79))
+* feat: add django 4.2 compatibility ([5861779](https://github.com/bmihelac/django-cruds-mixins/commit/5861779))
+
+
+### BREAKING CHANGE
+
+* remove Django < 4.2 compatibility
+
+
 ## [2.0.1](https://github.com/bmihelac/django-cruds-mixins/compare/v2.0.0...v2.0.1) (2022-05-10)
 
 
